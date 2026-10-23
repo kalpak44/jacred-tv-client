@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.HelloTv" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:colorAccent">@color/mint</item>
+        <!-- The screen gradient belongs to the window, not to each activity's root view:
+             drawing it in both places filled every pixel twice on every frame. As the
+             window background it also paints during the launch, before the first layout. -->
+        <item name="android:windowBackground">@drawable/screen_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="FieldLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">22dp</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/mint</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Field">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:background">@drawable/field_background</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@color/text_muted</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="FilterChip">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
+        <item name="android:background">@drawable/filter_background</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:paddingLeft">22dp</item>
+        <item name="android:paddingRight">22dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/filter_text</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="GhostButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:background">@drawable/ghost_button</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:paddingLeft">22dp</item>
+        <item name="android:paddingRight">22dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/ghost_text</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="SecondaryButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:background">@drawable/filter_background</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/filter_text</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="Chip">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+</resources>

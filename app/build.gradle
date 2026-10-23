@@ -1,0 +1,87 @@
+plugins {
+    id "com.android.application"
+}
+
+/*
+ * Release signing material never lives in the repository. Create keystore.properties in the
+ * project root (see README.md) and the release build picks it up; without it the release APK
+ * is built unsigned and has to be signed by hand before any device will install it.
+ */
+def signing = new Properties()
+def signingFile = rootProject.file("keystore.properties")
+def signingConfigured = false
+if (signingFile.exists()) {
+    signingFile.withInputStream { signing.load(it) }
+    def storePath = signing["storeFile"]?.toString()?.trim()
+    signingConfigured = storePath && rootProject.file(storePath).exists()
+    if (!signingConfigured) {
+        logger.warn("keystore.properties does not point at a keystore file; "
+                + "the release build will be unsigned")
+    }
+}
+
+android {
+    namespace "tv.jacred.client"
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "tv.jacred.client"
+        minSdk 28
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    signingConfigs {
+        release {
+            if (signingConfigured) {
+                storeFile rootProject.file(signing["storeFile"])
+                storePassword signing["storePassword"]
+                keyAlias signing["keyAlias"]
+                keyPassword signing["keyPassword"]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+            // An unsigned release APK is still useful (it can be signed later with
+            // apksigner), so a missing keystore is not a build failure.
+            if (signingConfigured) {
+                signingConfig signingConfigs.release
+            }
+        }
+        debug {
+            // Same application id as release: the Mi Box runs one copy of the app and the
+            // documented adb commands address it by that id.
+            minifyEnabled false
+        }
+    }
+
+    buildFeatures {
+        // No generated BuildConfig: nothing in the app reads one.
+        buildConfig false
+    }
+
+    lint {
+        lintConfig file("lint.xml")
+        abortOnError true
+        checkReleaseBuilds true
+        textReport true
+    }
+}
+
+// Compile warnings are worth reading on a codebase this small, so ask javac for all of
+// them. The few that remain are deliberate and carry a @SuppressWarnings with a reason.
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs << "-Xlint:all"
+}

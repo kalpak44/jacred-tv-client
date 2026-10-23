@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JacRed TV</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Title to search on jac.red</string>
+    <string name="settings">Settings</string>
+    <string name="save">Save</string>
+    <string name="recent">Recently watched</string>
+    <string name="test_connection">Test TorrServer</string>
+    <string name="import_from_server">Import TMDB from TorrServer</string>
+    <string name="use_image_mirror">Use image mirror</string>
+    <string name="clear_history">Clear history</string>
+    <string name="history_cleared">History cleared.</string>
+    <string name="open_magnet">Open magnet</string>
+    <string name="remove_from_server">Remove</string>
+    <string name="watch">▶  Watch</string>
+    <string name="keep_on_server">Keep on server</string>
+    <string name="status_kept">Saved to the TorrServer library.</string>
+    <string name="status_keep_failed">Could not save it: %1$s</string>
+    <string name="status_nothing_playable">This torrent has no video file.</string>
+
+    <string name="chip_checking">Checking TorrServer…</string>
+    <string name="chip_online">TorrServer %1$s</string>
+    <string name="chip_offline">TorrServer unreachable</string>
+
+    <string name="facet_type">Type</string>
+    <string name="facet_tracker">Tracker</string>
+    <string name="facet_voice">Voice</string>
+    <string name="facet_video">Video</string>
+    <string name="facet_codec">Codec</string>
+    <string name="facet_quality">Quality</string>
+    <string name="facet_year">Year</string>
+    <string name="facet_season">Season</string>
+    <string name="facet_all">All</string>
+    <string name="facet_chip">%1$s: %2$s</string>
+    <string name="facet_pick">Narrow by %1$s</string>
+    <string name="source_chip">API: %1$s</string>
+    <string name="source_native">Native</string>
+    <string name="source_jackett">Jackett</string>
+    <string name="sort_by_seeds">↑ By seeds</string>
+    <string name="sort_by_size">By size</string>
+    <string name="sort_added">Date added</string>
+    <string name="sort_updated">Date updated</string>
+
+    <string name="status_idle">Type a title and press Search to browse it on TMDB.</string>
+    <string name="status_idle_no_tmdb">Type a title and press Search. Add a TMDB key in Settings for posters and plots.</string>
+    <string name="status_searching_tmdb">Looking up \"%1$s\" on TMDB…</string>
+    <string name="status_tmdb_failed">TMDB lookup failed: %1$s</string>
+    <string name="status_no_titles">TMDB knows nothing called \"%1$s\" — searching jac.red directly.</string>
+    <string name="status_titles">%1$d titles — press OK on one to see its releases</string>
+    <string name="series">Series</string>
+    <string name="exit_title">Leave JacRed TV?</string>
+    <string name="exit_message">Playback already started on TorrServer keeps running.</string>
+    <string name="exit_stay">Stay</string>
+    <string name="exit_confirm">Exit</string>
+    <string name="empty_state">Search a film or show, pick a release,\nand it streams through TorrServer.</string>
+    <string name="no_tmdb_hint">No poster or plot: add a TMDB API key in Settings.</string>
+    <string name="status_enter_query">Enter something to search for first.</string>
+    <string name="status_searching">Searching jac.red for \"%1$s\"…</string>
+    <string name="status_search_failed">Search failed: %1$s</string>
+    <string name="status_no_results">Nothing found for \"%1$s\".</string>
+    <string name="status_results">%1$d results for \"%2$s\"</string>
+    <string name="status_results_filtered">%1$d of %2$d results for \"%3$s\"</string>
+    <string name="status_filtered_empty">No release matches these filters. Press OK on a filter to relax it.</string>
+
+    <string name="status_no_torrserver">No TorrServer address configured. Add one in Settings to stream this torrent.</string>
+    <string name="status_adding">Adding the magnet to TorrServer at %1$s…</string>
+    <string name="status_add_failed">TorrServer rejected the magnet: %1$s</string>
+    <string name="status_connecting">connecting to the swarm</string>
+    <string name="stats_speed">▼ %1$s/s</string>
+    <string name="stats_peers">%1$d peers</string>
+    <string name="stats_buffer">buffered %1$s</string>
+    <string name="stats_buffer_of">buffered %1$s of %2$s</string>
+    <string name="stats_idle">idle — TorrServer is not pulling data yet</string>
+    <string name="status_waiting">%1$s — waiting for the file list…</string>
+    <string name="status_files_failed">Could not read the file list: %1$s</string>
+    <string name="status_metadata_timeout">No metadata arrived — this torrent has no reachable seeders right now. Go back and try another release.</string>
+    <string name="status_files">%1$d playable of %2$d files — press OK to start one</string>
+    <string name="status_files_watched">%1$d playable of %2$d files — %3$d already watched</string>
+    <string name="play_all">▶  Play all</string>
+    <string name="watched_button">Watched marks</string>
+    <string name="hold_for_options">Hold OK on a file to play it or change its watched mark.</string>
+    <string name="file_menu_play">▶  Play this file</string>
+    <string name="file_menu_mark">Mark as watched</string>
+    <string name="file_menu_unmark">Unmark as watched</string>
+    <string name="toast_marked">Marked watched: %1$s</string>
+    <string name="toast_unmarked">Unmarked: %1$s</string>
+    <string name="watched_title">Watched marks</string>
+    <string name="watched_subtitle">OK marks or unmarks a file. Back closes.</string>
+    <string name="history_play">Play again</string>
+    <string name="history_remove">Remove from recent</string>
+    <string name="playlist_entry">Playlist · %1$d files</string>
+    <string name="status_play_failed">Could not start the player: %1$s</string>
+    <string name="status_opening">Waking the torrent on TorrServer…</string>
+    <string name="status_removed">Removed from TorrServer.</string>
+    <string name="status_no_magnet_handler">No app on this device handles magnet links.</string>
+    <string name="file_not_video">not video</string>
+    <string name="file_watched">watched</string>
+    <!-- A watched file keeps its tick in front of the name. -->
+    <string name="file_name_watched">✓  %1$s</string>
+    <string name="tmdb_rating">TMDB %1$.1f</string>
+
+    <string name="dialog_pick_player">Play with</string>
+    <string name="player_always_ask">Ask every time</string>
+
+    <string name="settings_api">jac.red API address</string>
+    <string name="settings_api_hint">https://jac.red</string>
+    <string name="settings_torrserver">TorrServer address</string>
+    <string name="settings_torrserver_hint">http://192.168.1.7:5665</string>
+    <string name="settings_user">TorrServer user (optional)</string>
+    <string name="settings_pass">TorrServer password (optional)</string>
+    <string name="settings_tmdb_key">TMDB API key (for posters and plots)</string>
+    <string name="settings_tmdb_key_hint">Leave empty to run without artwork</string>
+    <string name="settings_tmdb_api">TMDB API address</string>
+    <string name="settings_tmdb_images">TMDB image address</string>
+    <string name="settings_player">Default video player</string>
+    <string name="settings_player_hint">Apps on this device that can open a video stream.</string>
+
+    <string name="test_no_address">Enter a TorrServer address first.</string>
+    <string name="test_running">Contacting %1$s…</string>
+    <string name="test_ok">TorrServer reachable — version %1$s</string>
+    <string name="test_failed">TorrServer unreachable: %1$s</string>
+    <string name="import_ok">Imported TMDB settings from TorrServer.</string>
+    <string name="import_no_key">TorrServer has no TMDB key stored — enter one above.</string>
+</resources>

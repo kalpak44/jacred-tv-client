@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Android 11 and older read this file for adb backup and cloud backup. Nothing leaves the
+  device: settings hold a TorrServer address with its credentials and a TMDB key. Cloud
+  backup is off entirely (android:allowBackup="false"); Android 12 and newer use
+  data_extraction_rules.xml instead.
+-->
+<full-backup-content>
+    <exclude domain="root" />
+    <exclude domain="file" />
+    <exclude domain="database" />
+    <exclude domain="sharedpref" />
+    <exclude domain="external" />
+</full-backup-content>

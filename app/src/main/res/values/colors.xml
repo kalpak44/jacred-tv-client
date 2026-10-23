@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="mint">#67F5D2</color>
+    <color name="text_secondary">#D4DFEA</color>
+    <color name="text_muted">#8192A6</color>
+    <color name="button_text">#071621</color>
+    <color name="warning">#FFB4A2</color>
+    <!-- Selected query text: the grey system highlight looks like a rendering fault here. -->
+    <color name="selection">#6625B49A</color>
+    <color name="chip_size_text">#67F5D2</color>
+    <color name="chip_seed_text">#74E39B</color>
+    <color name="chip_peer_text">#FF9A9A</color>
+    <color name="chip_date_text">#9FB3C8</color>
+    <color name="chip_fresh_text">#F3B86B</color>
+    <color name="chip_quality_text">#86B9FF</color>
+    <color name="chip_voice_text">#C2A6FF</color>
+    <color name="chip_quality_4k_text">#F7D070</color>
+</resources>

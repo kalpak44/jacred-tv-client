@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Settings hold a TorrServer address with its user name and password, and a TMDB key. None
+  of that should leave the device, so nothing is included in a cloud backup or in a
+  device-to-device transfer. Cloud backup is off anyway (android:allowBackup="false"); this
+  file covers Android 12 and newer, where transfer is governed separately.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="root" />
+        <exclude domain="file" />
+        <exclude domain="database" />
+        <exclude domain="sharedpref" />
+        <exclude domain="external" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="root" />
+        <exclude domain="file" />
+        <exclude domain="database" />
+        <exclude domain="sharedpref" />
+        <exclude domain="external" />
+    </device-transfer>
+</data-extraction-rules>
