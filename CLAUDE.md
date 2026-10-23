@@ -1,11 +1,13 @@
-# HelloTv Project Instructions
+# JacRed TV Project Instructions
+
+Before committing anything, read [Commits](#commits).
 
 ## Project overview
 
-HelloTv (shown as **JacRed TV**) is a native Android TV torrent-streaming client
-for a Xiaomi Mi Box 4. It searches jac.red, streams the chosen release through
-TorrServer, and hands the stream to an installed video player. It is intended to
-be operated with a TV remote, not a touchscreen.
+**JacRed TV** is a native Android TV torrent-streaming client for a Xiaomi Mi
+Box 4. It searches jac.red, streams the chosen release through TorrServer, and
+hands the stream to an installed video player. It is intended to be operated
+with a TV remote, not a touchscreen.
 
 Flow: **browse** (TMDB titles) → **releases** (jac.red, with filters) →
 **detail** (TorrServer files, Watch / Keep / Remove).
@@ -172,7 +174,7 @@ adb -s 192.168.1.128:5555 shell am force-stop tv.jacred.client
 
 ## Useful development commands
 
-Verify that HelloTv is the foreground activity:
+Verify that JacRed TV is the foreground activity:
 
 ```sh
 adb -s 192.168.1.128:5555 shell dumpsys window windows | \
@@ -199,3 +201,18 @@ adb -s 192.168.1.128:5555 logcat --pid="$(
 When changing the application, build successfully before deployment, install
 with `-r`, launch the main activity, and verify D-pad focus plus OK-button
 behavior on the actual Mi Box.
+
+## Commits
+
+- **Author every commit `Pavel Usanli <pavel.usanli@gmail.com>`.** Read
+  `git config --local user.name` and `user.email` before the first commit in a
+  clone and set them if they differ. A fresh clone carries no identity of its
+  own, so it inherits the machine's global one — a different account, which
+  leaves the commit unlinked from `kalpak44`.
+- **Never `git config --global`.** That identity belongs to unrelated work and
+  is correct there; overriding it silently retags those repositories too.
+- **A commit message is one short, clear imperative line.** No body, no
+  description, no bullet list of what changed — the diff already says that.
+- **No trailers.** No `Co-Authored-By`, no generated-with line, no sign-off.
+- **Push straight to `main`.** No feature branches and no pull requests; this is
+  a single-maintainer repo with no CI gate to wait on.
