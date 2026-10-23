@@ -24,6 +24,30 @@ and `HttpURLConnection` — so Gradle never needs to resolve external artifacts.
 | `DetailActivity` | Adds the magnet to TorrServer, lists files, plays them |
 | `SettingsActivity` | jac.red URL, TorrServer URL and credentials, TMDB key/URLs, default player |
 
+### Code map
+
+Four activities and fourteen helpers, all in `tv.jacred.client`. The project
+sets `android.useAndroidX=false`, so the activities extend plain
+`android.app.Activity`, not `AppCompatActivity`, and no helper subclasses a
+framework type at all. Reach for a framework API, never an AndroidX one.
+
+| Class | Role |
+| --- | --- |
+| `JacRed` | Search against either jac.red source, returning `Torrent` list |
+| `TorrServer` | Add/list/remove torrents, build stream and playlist URLs, read watch marks |
+| `Tmdb` | Poster and plot lookup, image URL building |
+| `Http` | `GET` and `POST` JSON over `HttpURLConnection`, with optional basic auth |
+| `Torrent` | Parses one API result; also `humanSize` and `shortDate` formatting |
+| `TorrFile` | One file inside a torrent (id, path, length) |
+| `TorrStatus` | Parsed TorrServer status payload |
+| `Prefs` | Every setting, over `SharedPreferences` |
+| `History` | Recently-watched list, persisted through `Prefs` |
+| `Filters` | Quality/HDR/codec/60fps/sort state, applied to a release list |
+| `Players` | Discovers installed video players and hands a stream to one |
+| `Ui` | Background-work helper and named thread factory |
+| `TvDialog` | D-pad-navigable dialog |
+| `ImageLoader` | Async poster loading into an `ImageView` |
+
 ### External services
 
 - **jac.red search** — `GET /api/v1.0/torrents?search=&sort=seeders` is primary:
@@ -46,6 +70,9 @@ releases reported as 480), so resolution comes from the ffprobe video stream whe
 present; and neither API exposes a frame rate, so the 60 fps filter is a title
 heuristic.
 
+
+## Project facts
+
 - Project type: Android application
 - Language: Java
 - UI: Android XML views/resources
@@ -61,6 +88,9 @@ heuristic.
 - Java source/target compatibility: 17
 - Release build: R8 minify plus resource shrinking, signed from
   `keystore.properties` when that file exists (see README)
+- Named `HelloTv` still in `settings.gradle` (`rootProject.name`) and the
+  `Theme.HelloTv` style: renaming them changes the Gradle project and a
+  resource identifier, so it is a code change, not a doc fix
 
 Keep all controls usable with the D-pad. Every interactive control must have a
 clear focused state, and the app must not require touch input. Design for a
@@ -172,6 +202,24 @@ Stop it when needed:
 adb -s 192.168.1.128:5555 shell am force-stop tv.jacred.client
 ```
 
+## Continuous integration
+
+`.github/workflows/build.yml` assembles both variants on every push to `main`,
+every pull request and on demand. There is nothing to configure: the app
+resolves no third-party artifacts, so the build is the whole job, and lint
+fails it rather than filing a report nobody opens.
+
+Each run uploads two artifacts:
+
+| Artifact | Installs on the Mi Box |
+| --- | --- |
+| `jacred-tv-debug` | yes — signed with the debug key, `adb install -r` it directly |
+| `jacred-tv-release-unsigned` | no — minified and unsigned, sign it first |
+
+The runner holds no signing material, so a release artifact from CI always
+needs signing by hand. Build locally with `keystore.properties` in place when
+a signed release is what you need.
+
 ## Useful development commands
 
 Verify that JacRed TV is the foreground activity:
@@ -214,5 +262,6 @@ behavior on the actual Mi Box.
 - **A commit message is one short, clear imperative line.** No body, no
   description, no bullet list of what changed — the diff already says that.
 - **No trailers.** No `Co-Authored-By`, no generated-with line, no sign-off.
-- **Push straight to `main`.** No feature branches and no pull requests; this is
-  a single-maintainer repo with no CI gate to wait on.
+- **Push straight to `main`.** No feature branches and no pull requests. The
+  build workflow runs on the pushed commit; check it went green rather than
+  waiting on it before pushing.
