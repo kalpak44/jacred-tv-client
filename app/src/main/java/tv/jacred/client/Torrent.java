@@ -260,15 +260,6 @@ final class Torrent {
         return names;
     }
 
-    /** yyyy-MM-dd for the row chips; empty when the tracker gave no date. */
-    static String shortDate(long millis) {
-        if (millis <= 0) {
-            return "";
-        }
-        return new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US)
-                .format(new java.util.Date(millis));
-    }
-
     static String humanSize(long bytes) {
         if (bytes <= 0) {
             return "";

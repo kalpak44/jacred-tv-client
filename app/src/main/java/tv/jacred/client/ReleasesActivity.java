@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * The releases jac.red holds for one title.
@@ -296,13 +295,11 @@ public class ReleasesActivity extends Activity {
     /** The views of one release row, found once when the row is inflated. */
     private static final class Row {
         final TextView title;
-        final TextView tracker;
+        final ImageView tracker;
         final TextView quality;
         final TextView size;
         final TextView seed;
         final TextView peer;
-        final TextView date;
-        final TextView extra;
         final TextView voice;
 
         Row(View row) {
@@ -312,8 +309,6 @@ public class ReleasesActivity extends Activity {
             size = row.findViewById(R.id.chip_size);
             seed = row.findViewById(R.id.chip_seed);
             peer = row.findViewById(R.id.chip_peer);
-            date = row.findViewById(R.id.chip_date);
-            extra = row.findViewById(R.id.chip_extra);
             voice = row.findViewById(R.id.chip_voice);
         }
     }
@@ -358,7 +353,7 @@ public class ReleasesActivity extends Activity {
             Torrent torrent = shown.get(position);
 
             views.title.setText(torrent.title);
-            views.tracker.setText(initial(torrent.tracker));
+            views.tracker.setImageResource(Trackers.icon(Trackers.first(torrent.tracker)));
 
             chip(views.quality, torrent.quality > 0
                     ? torrent.quality + "p" + (torrent.hdr ? " HDR" : "") : "");
@@ -366,9 +361,6 @@ public class ReleasesActivity extends Activity {
             chip(views.size, torrent.sizeName);
             chip(views.seed, "↑ " + torrent.seeders);
             chip(views.peer, "↓ " + torrent.peers);
-            chip(views.date, Torrent.shortDate(torrent.published));
-            chip(views.extra, torrent.updated > torrent.published
-                    ? Torrent.shortDate(torrent.updated) : "");
             chip(views.voice, torrent.voices.isEmpty() ? ""
                     : android.text.TextUtils.join(", ", torrent.voices));
             return row;
@@ -396,11 +388,6 @@ public class ReleasesActivity extends Activity {
         private void chip(TextView chip, String text) {
             chip.setText(text);
             chip.setVisibility(text.isEmpty() ? View.GONE : View.VISIBLE);
-        }
-
-        private String initial(String tracker) {
-            return tracker.isEmpty() ? "?"
-                    : tracker.substring(0, 1).toUpperCase(Locale.US);
         }
     }
 }

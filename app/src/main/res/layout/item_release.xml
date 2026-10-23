@@ -15,15 +15,14 @@
         android:gravity="top"
         android:orientation="horizontal">
 
-        <TextView
+        <ImageView
             android:id="@+id/row_tracker_badge"
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:background="@drawable/tracker_badge"
-            android:gravity="center"
-            android:textAllCaps="true"
-            android:textColor="@color/mint"
-            android:textSize="15sp" />
+            android:contentDescription="@null"
+            android:padding="6dp"
+            android:scaleType="fitCenter" />
 
         <TextView
             android:id="@+id/row_release"
@@ -71,18 +70,6 @@
             style="@style/Chip"
             android:background="@drawable/chip_peer"
             android:textColor="@color/chip_peer_text" />
-
-        <TextView
-            android:id="@+id/chip_date"
-            style="@style/Chip"
-            android:background="@drawable/chip_date"
-            android:textColor="@color/chip_date_text" />
-
-        <TextView
-            android:id="@+id/chip_extra"
-            style="@style/Chip"
-            android:background="@drawable/chip_fresh"
-            android:textColor="@color/chip_fresh_text" />
 
         <TextView
             android:id="@+id/chip_voice"
