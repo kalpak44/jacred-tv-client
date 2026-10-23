@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,25 +26,6 @@ public class DetailActivity extends Activity {
     static final String EXTRA_POSTER = "poster";
     static final String EXTRA_RELEASE = "release";
 
-    /**
-     * Mime types to offer a player for an M3U, most specific first. TorrServer serves the
-     * playlist as audio/x-mpegurl, but players register their own spellings — Amnis, for
-     * instance, declares application/x-mpegURL with that exact capitalisation and no
-     * audio/x-mpegurl at all, and intent type matching is case sensitive. video/* is last:
-     * a player that takes the playlist as a plain video opens and quits straight away.
-     */
-    private static final String[] PLAYLIST_TYPES = {
-            "application/x-mpegURL",
-            "application/vnd.apple.mpegurl",
-            "application/mpegurl",
-            "audio/x-mpegurl",
-            "video/*",
-    };
-
-    /** How long to wait for a revived torrent to list its files before launching a player. */
-    private static final int PLAYLIST_WAIT_ATTEMPTS = 24;
-    private static final long PLAYLIST_WAIT_MS = 500L;
-
     /** How often the screen refreshes TorrServer's transfer figures. */
     private static final long STATS_INTERVAL_MS = 1500L;
 
@@ -59,6 +41,10 @@ public class DetailActivity extends Activity {
     private String magnet;
     private String hash = "";
     private String posterUrl = "";
+
+    private Button keepButton;
+    /** Whether TorrServer is holding this torrent, which is what the Keep button offers. */
+    private boolean onServer;
 
     private TextView status;
     private TextView stats;
@@ -125,13 +111,9 @@ public class DetailActivity extends Activity {
         });
 
         findViewById(R.id.watch_button).setOnClickListener(view -> watchBestFile());
-        findViewById(R.id.playlist_button).setOnClickListener(view -> playAll());
-        findViewById(R.id.watched_button).setOnClickListener(view -> watchedMenu());
-        findViewById(R.id.keep_button).setOnClickListener(view -> keepOnServer());
+        keepButton = findViewById(R.id.keep_button);
+        keepButton.setOnClickListener(view -> toggleOnServer());
         findViewById(R.id.magnet_button).setOnClickListener(view -> openMagnetExternally());
-        findViewById(R.id.remove_button).setOnClickListener(view -> removeFromServer());
-        findViewById(R.id.detail_settings_button).setOnClickListener(view ->
-                startActivity(new Intent(DetailActivity.this, SettingsActivity.class)));
 
         if (posterUrl.isEmpty()) {
             poster.setVisibility(View.GONE);
@@ -232,18 +214,68 @@ public class DetailActivity extends Activity {
         return value == null ? "" : value;
     }
 
+    /** What opening the screen finds out: whether the torrent was there, and its hash. */
+    private static final class Opened {
+        final boolean alreadyThere;
+        final String hash;
+
+        Opened(boolean alreadyThere, String hash) {
+            this.alreadyThere = alreadyThere;
+            this.hash = hash;
+        }
+    }
+
     private void addToServer() {
         status.setText(getString(R.string.status_adding, server.address()));
-        Ui.background(this, () -> server.add(magnet, title, posterUrl, false),
-                (newHash, error) -> {
+        Ui.background(this, () -> {
+            // Asked before adding: our own add would make the answer yes either way.
+            boolean alreadyThere = server.holds(JacRed.infoHash(magnet));
+            return new Opened(alreadyThere, server.add(magnet, title, posterUrl, false));
+        }, (opened, error) -> {
             if (error != null) {
                 status.setText(getString(R.string.status_add_failed, Ui.message(error)));
                 actionRow.setVisibility(View.VISIBLE);
                 findViewById(R.id.magnet_button).requestFocus();
                 return;
             }
-            hash = newHash;
+            hash = opened.hash;
+            onServer = opened.alreadyThere;
+            updateKeepButton();
             poll(POLL_ATTEMPTS);
+        });
+    }
+
+    /** One button for both directions: keep what is not held, drop what is. */
+    private void updateKeepButton() {
+        keepButton.setText(onServer ? R.string.remove_from_server : R.string.keep_on_server);
+    }
+
+    /**
+     * Keeps the torrent or drops it, whichever the button is offering. Keeping re-adds the
+     * same magnet with save_to_db so it survives in the TorrServer library; dropping hands
+     * the hash back. Playing still works either way — every launch re-adds the magnet.
+     */
+    private void toggleOnServer() {
+        if (onServer) {
+            final String torrentHash = hash;
+            onServer = false;
+            updateKeepButton();
+            Ui.background(this, () -> {
+                server.remove(torrentHash);
+                return null;
+            }, (ignored, error) ->
+                    Toast.makeText(this, R.string.status_removed, Toast.LENGTH_SHORT).show());
+            return;
+        }
+        Ui.background(this, () -> server.add(magnet, title, posterUrl, true), (kept, error) -> {
+            if (error != null) {
+                Toast.makeText(this, getString(R.string.status_keep_failed, Ui.message(error)),
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+            onServer = true;
+            updateKeepButton();
+            Toast.makeText(this, R.string.status_kept, Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -294,10 +326,6 @@ public class DetailActivity extends Activity {
         actionRow.setVisibility(View.VISIBLE);
         findViewById(R.id.watch_button).setVisibility(View.VISIBLE);
         findViewById(R.id.keep_button).setVisibility(View.VISIBLE);
-        // A playlist only means something when there is more than one episode to walk.
-        findViewById(R.id.playlist_button)
-                .setVisibility(videoCount > 1 ? View.VISIBLE : View.GONE);
-        findViewById(R.id.watched_button).setVisibility(View.VISIBLE);
         findViewById(R.id.watch_button).requestFocus();
         fileList.setSelection(0);
 
@@ -335,9 +363,36 @@ public class DetailActivity extends Activity {
         }).show();
     }
 
-    private void launch(TorrFile file, String packageName) {
-        playVia(torrentHash -> server.streamUrl(torrentHash, file), file.name(),
-                new String[]{"video/*"}, packageName, file.id);
+    /**
+     * Hands one file to a player, re-adding the magnet first.
+     *
+     * <p>TorrServer drops idle torrents (this server is set to 30 seconds) and the app adds
+     * them without saving to the database, so by the time a file is chosen the hash can be
+     * gone — /stream then answers 404 and the player opens on a blank screen. Adding is
+     * idempotent and returns the same hash, so this simply revives the torrent.
+     */
+    private void launch(final TorrFile file, final String packageName) {
+        status.setText(R.string.status_opening);
+        Ui.background(this, () -> server.add(magnet, title, posterUrl, false),
+                (freshHash, error) -> {
+                    if (error != null) {
+                        status.setText(getString(R.string.status_add_failed, Ui.message(error)));
+                        return;
+                    }
+                    hash = freshHash;
+                    try {
+                        Players.play(this, server.streamUrl(hash, file), title, packageName,
+                                "video/*");
+                    } catch (Exception e) {
+                        Toast.makeText(this, getString(R.string.status_play_failed,
+                                Ui.message(e)), Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    history.remember(new History.Entry(title, magnet, posterUrl, file.name(),
+                            System.currentTimeMillis()));
+                    markWatched(file.id);
+                    showStatus();
+                });
     }
 
     /** Plays the largest video file — the feature, in all but the oddest torrents. */
@@ -353,16 +408,6 @@ public class DetailActivity extends Activity {
             return;
         }
         play(best);
-    }
-
-    /** Re-adds the same magnet with save_to_db so it stays in the TorrServer library. */
-    private void keepOnServer() {
-        Ui.background(this, () -> server.add(magnet, title, posterUrl, true), (kept, error) -> {
-            Toast.makeText(this,
-                    error == null ? getString(R.string.status_kept)
-                            : getString(R.string.status_keep_failed, Ui.message(error)),
-                    Toast.LENGTH_SHORT).show();
-        });
     }
 
     /** Held OK on a file: play it, continue from it, or change its watched mark. */
@@ -385,63 +430,6 @@ public class DetailActivity extends Activity {
         }).show();
     }
 
-    /** Hands the whole torrent to the player as an M3U list, resuming where it left off. */
-    private void playAll() {
-        playVia(torrentHash -> server.playlistUrl(torrentHash, false),
-                getString(R.string.playlist_entry, videos), PLAYLIST_TYPES,
-                prefs.playerPackage(), null);
-    }
-
-    /** Builds a playback URL once the torrent's hash is known to be live again. */
-    private interface UrlFor {
-        String of(String hash);
-    }
-
-    /**
-     * Re-adds the magnet before handing anything to a player.
-     *
-     * <p>TorrServer drops idle torrents (this server is set to 30 seconds) and the app adds
-     * them without saving to the database, so by the time a file is chosen the hash can be
-     * gone — /playlist and /stream then answer 404 and the player opens on a blank screen.
-     * Adding is idempotent and returns the same hash, so this simply revives the torrent.
-     */
-    private void playVia(final UrlFor urlFor, final String historyLabel, final String[] types,
-                         final String packageName, final Integer markFileIndex) {
-        status.setText(R.string.status_opening);
-        Ui.background(this, () -> {
-            String freshHash = server.add(magnet, title, posterUrl, false);
-            // A revived torrent reports "getting info" for a second or two, and during that
-            // window /playlist answers 200 with an empty body — a player handed that shows a
-            // blank screen. Single files are immune because /stream waits for data instead.
-            for (int attempt = 0; attempt < PLAYLIST_WAIT_ATTEMPTS; attempt++) {
-                if (server.get(freshHash).hasFiles()) {
-                    break;
-                }
-                Thread.sleep(PLAYLIST_WAIT_MS);
-            }
-            return freshHash;
-        },
-                (freshHash, error) -> {
-                    if (error != null) {
-                        status.setText(getString(R.string.status_add_failed, Ui.message(error)));
-                        return;
-                    }
-                    hash = freshHash;
-                    try {
-                        Players.play(this, urlFor.of(hash), title, packageName, types);
-                    } catch (Exception e) {
-                        Toast.makeText(this, getString(R.string.status_play_failed,
-                                Ui.message(e)), Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    history.remember(new History.Entry(title, magnet, posterUrl, historyLabel,
-                            System.currentTimeMillis()));
-                    if (markFileIndex != null) {
-                        markWatched(markFileIndex);
-                    }
-                    showStatus();
-                });
-    }
 
     /** Records a file as watched locally and on the server once playback starts. */
     private void markWatched(final int fileIndex) {
@@ -480,21 +468,6 @@ public class DetailActivity extends Activity {
         });
     }
 
-    /** Lists every file with its watched tick; OK flips the mark on the server. */
-    private void watchedMenu() {
-        final TvDialog marks = TvDialog.create(this, getString(R.string.watched_title),
-                getString(R.string.watched_subtitle));
-        for (TorrFile file : files) {
-            marks.add(file.name(), Torrent.humanSize(file.length), viewed.contains(file.id));
-        }
-        marks.onPick(index -> {
-            toggleWatched(index);
-            marks.setTick(index, viewed.contains(files.get(index).id));
-            // Stay open: marking a whole season is a run of OK presses.
-            return false;
-        }).show();
-    }
-
     /** Status line doubles as the watched counter once marks come back from the server. */
     private void showStatus() {
         int watched = 0;
@@ -507,21 +480,6 @@ public class DetailActivity extends Activity {
                 ? getString(R.string.status_files, videos, files.size())
                 : getString(R.string.status_files_watched, videos, files.size(), watched));
         ((TextView) findViewById(R.id.detail_hint)).setText(R.string.hold_for_options);
-    }
-
-    private void removeFromServer() {
-        if (hash.isEmpty()) {
-            finish();
-            return;
-        }
-        final String torrentHash = hash;
-        Ui.background(this, () -> {
-            server.remove(torrentHash);
-            return null;
-        }, (ignored, error) -> {
-            Toast.makeText(this, R.string.status_removed, Toast.LENGTH_SHORT).show();
-            finish();
-        });
     }
 
     private void openMagnetExternally() {

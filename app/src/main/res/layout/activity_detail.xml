@@ -114,20 +114,6 @@
                 android:visibility="gone" />
 
             <Button
-                android:id="@+id/playlist_button"
-                style="@style/GhostButton"
-                android:layout_marginEnd="14dp"
-                android:text="@string/play_all"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/watched_button"
-                style="@style/GhostButton"
-                android:layout_marginEnd="14dp"
-                android:text="@string/watched_button"
-                android:visibility="gone" />
-
-            <Button
                 android:id="@+id/keep_button"
                 style="@style/GhostButton"
                 android:layout_marginEnd="14dp"
@@ -139,18 +125,6 @@
                 style="@style/GhostButton"
                 android:layout_marginEnd="14dp"
                 android:text="@string/open_magnet" />
-
-            <Button
-                android:id="@+id/remove_button"
-                style="@style/GhostButton"
-                android:layout_marginEnd="14dp"
-                android:text="@string/remove_from_server" />
-
-            <Button
-                android:id="@+id/detail_settings_button"
-                style="@style/GhostButton"
-                android:layout_marginEnd="14dp"
-                android:text="@string/settings" />
         </LinearLayout>
         </HorizontalScrollView>
 

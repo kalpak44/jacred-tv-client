@@ -74,6 +74,25 @@ final class TorrServer {
                 Http.postJson(base + "/torrents", request.toString(), user, pass)));
     }
 
+    /**
+     * Whether the server already holds this torrent — either saved to its database, or
+     * still alive from a recent play. Asked before the screen adds the magnet itself,
+     * which would otherwise make the answer always yes.
+     */
+    boolean holds(String infoHash) throws Exception {
+        JSONObject request = new JSONObject();
+        request.put("action", "list");
+        JSONArray array = new JSONArray(
+                Http.postJson(base + "/torrents", request.toString(), user, pass));
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject item = array.optJSONObject(i);
+            if (item != null && infoHash.equalsIgnoreCase(item.optString("hash"))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     void remove(String hash) {
         try {
             JSONObject request = new JSONObject();
@@ -122,15 +141,6 @@ final class TorrServer {
             // Older builds may not expose /viewed; treat as "nothing watched".
         }
         return indexes;
-    }
-
-    /**
-     * The whole torrent as an M3U playlist, so a player can walk the episodes itself.
-     * {@code fromLast} starts the list at the file last played rather than the first.
-     */
-    String playlistUrl(String hash, boolean fromLast) {
-        // The .m3u filename is part of the route and gives extension-sniffing players a hint.
-        return base + "/playlist/playlist.m3u?hash=" + hash + (fromLast ? "&fromlast=true" : "");
     }
 
     String streamUrl(String hash, TorrFile file) {

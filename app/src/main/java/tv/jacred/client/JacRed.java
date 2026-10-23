@@ -72,7 +72,8 @@ final class JacRed {
         return merged;
     }
 
-    private static String infoHash(String magnet) {
+    /** The btih of a magnet, lower case; the whole link when it carries none. */
+    static String infoHash(String magnet) {
         int start = magnet.indexOf("btih:");
         if (start < 0) {
             return magnet;
