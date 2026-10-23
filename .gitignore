@@ -15,3 +15,10 @@ local.properties
 keystore.properties
 *.jks
 *.keystore
+
+# Stray build outputs copied out of build/ for an adb install
+*.apk
+*.aab
+
+# Android Studio heap dumps and profiler captures
+*.hprof
