@@ -19,14 +19,14 @@ and `HttpURLConnection` — so Gradle never needs to resolve external artifacts.
 
 | Activity | Role |
 | --- | --- |
-| `MainActivity` | Search box, TMDB poster grid, recently-watched row, TorrServer status chip |
+| `MainActivity` | Search box, TMDB poster grid, recently-watched row, TorrServer status chip, update banner |
 | `ReleasesActivity` | jac.red releases for one title, with quality/HDR/codec/60fps/sort chips |
 | `DetailActivity` | Adds the magnet to TorrServer, lists files, plays them |
-| `SettingsActivity` | jac.red URL, TorrServer URL and credentials, TMDB key/URLs, default player |
+| `SettingsActivity` | jac.red URL, TorrServer URL and credentials, TMDB key/URLs, default player, **Check for updates** |
 
 ### Code map
 
-Four activities and fourteen helpers, all in `tv.jacred.client`. The project
+Four activities and sixteen helpers, all in `tv.jacred.client`. The project
 sets `android.useAndroidX=false`, so the activities extend plain
 `android.app.Activity`, not `AppCompatActivity`, and no helper subclasses a
 framework type at all. Reach for a framework API, never an AndroidX one.
@@ -44,6 +44,8 @@ framework type at all. Reach for a framework API, never an AndroidX one.
 | `History` | Recently-watched list, persisted through `Prefs` |
 | `Filters` | Quality/HDR/codec/60fps/sort state, applied to a release list |
 | `Players` | Discovers installed video players and hands a stream to one |
+| `Updates` | Reads the newest GitHub release, compares versions, downloads and installs the APK |
+| `UpdatePrompt` | The modal behind both ways into an update — the banner and the Settings button |
 | `Ui` | Background-work helper and named thread factory |
 | `TvDialog` | D-pad-navigable dialog |
 | `ImageLoader` | Async poster loading into an `ImageView` |
@@ -64,6 +66,18 @@ framework type at all. Reach for a framework API, never an AndroidX one.
 - **TMDB** — optional. Without an API key the app still works, but there are no
   posters or plots. Lookups happen on the detail/releases screens only, never
   per result row.
+
+### Updating itself
+
+The app offers its own releases: Settings has a **Check for updates** button, and the home
+screen shows a banner when `releases/latest` carries a newer `versionName`. The APK is
+downloaded from the release asset and handed to `PackageInstaller`, which is what lets a
+failure reach the screen — there is nowhere to read a log on a TV.
+
+Android replaces an installed app only when the new APK carries the same signature, so
+`release.yml` signs every release with one long-lived key held in `homelab-infra` as
+`ANDROID_KEYSTORE_BASE64`. A build installed from `assembleDebug` is signed with the local
+debug key instead and cannot be updated by a release — it has to be uninstalled once.
 
 Useful facts learned from the live APIs: `info.quality` is often wrong (1080p
 releases reported as 480), so resolution comes from the ffprobe video stream when

@@ -38,6 +38,13 @@
          focus target, and focus is the only way around this app. -->
     <issue id="ButtonStyle" severity="ignore" />
 
+    <!-- The install-status receiver is guarded by a signature-level permission instead,
+         which protects it on API 28 as well; the flag lint asks for lands only at 33, and
+         the ContextCompat call it suggests is AndroidX, which this app does not depend on. -->
+    <issue id="UnspecifiedRegisterReceiverFlag" severity="ignore">
+        <ignore path="src/main/java/tv/jacred/client/Updates.java" />
+    </issue>
+
     <!-- Counts in status lines read "3 titles"/"1 titles". Wiring up plurals would change
          wording the app already ships with, and the app is English-only. -->
     <issue id="PluralsCandidate" severity="ignore" />

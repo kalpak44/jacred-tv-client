@@ -24,6 +24,8 @@ final class Prefs {
     static final String LAST_QUERY = "last_query";
     static final String HISTORY = "history";
     static final String SOURCE = "source";
+    static final String UPDATE_LATEST = "update_latest";
+    static final String UPDATE_CHECKED = "update_checked";
 
     private final SharedPreferences prefs;
 
@@ -74,6 +76,23 @@ final class Prefs {
 
     String playerLabel() {
         return get(PLAYER_LABEL, "");
+    }
+
+    /** Newest release seen by the last check, so the banner survives a restart. */
+    String latestRelease() {
+        return get(UPDATE_LATEST, "");
+    }
+
+    long updateCheckedAt() {
+        try {
+            return Long.parseLong(get(UPDATE_CHECKED, "0"));
+        } catch (NumberFormatException e) {
+            return 0L;
+        }
+    }
+
+    void setUpdateCheckedAt(long millis) {
+        set(UPDATE_CHECKED, Long.toString(millis));
     }
 
     private static String stripSlash(String url) {

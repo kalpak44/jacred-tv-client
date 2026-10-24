@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -40,6 +41,9 @@ public class MainActivity extends Activity {
     private View emptyState;
     private View settingsButton;
     private View searchButton;
+    private Button updateBanner;
+    /** The release the banner offers. Null when only its version number is known. */
+    private Updates.Release pendingUpdate;
     /** First card of the history row, the landing spot when moving down from the search box. */
     private View firstHistoryCard;
     private View historySection;
@@ -92,6 +96,8 @@ public class MainActivity extends Activity {
 
         searchButton = findViewById(R.id.search_button);
         settingsButton = findViewById(R.id.settings_button);
+        updateBanner = findViewById(R.id.update_banner);
+        updateBanner.setOnClickListener(view -> openUpdate());
         searchButton.setOnClickListener(view -> search());
         settingsButton.setOnClickListener(view ->
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class)));
@@ -103,7 +109,7 @@ public class MainActivity extends Activity {
                 return false;
             }
             if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-                return settingsButton.requestFocus();
+                return focusAboveSearch();
             }
             if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
                 return focusBelowSearch();
@@ -187,6 +193,7 @@ public class MainActivity extends Activity {
                 : getString(R.string.status_idle_no_tmdb));
         showHistory();
         pingServer();
+        refreshUpdates();
     }
 
     private void pingServer() {
@@ -219,6 +226,73 @@ public class MainActivity extends Activity {
         historySection.setVisibility(View.GONE);
         historyShown = "";
         updateEmptyState();
+    }
+
+    /** Up from the search row: the update banner when it is there, otherwise Settings. */
+    private boolean focusAboveSearch() {
+        return updateBanner.getVisibility() == View.VISIBLE
+                ? updateBanner.requestFocus() : settingsButton.requestFocus();
+    }
+
+    /**
+     * Shows the banner from the version the last check stored, then asks GitHub again if
+     * that answer has gone stale. The cached version is what makes the banner appear at
+     * once on a cold start instead of a second later.
+     */
+    private void refreshUpdates() {
+        showUpdateBanner(prefs.latestRelease());
+        if (!Updates.checkDue(prefs)) {
+            return;
+        }
+        Ui.background(this, Updates::latest, (release, error) -> {
+            // A failed check says nothing worth interrupting the home screen for; the
+            // Settings button is where someone asking on purpose gets told.
+            if (error != null) {
+                return;
+            }
+            Updates.remember(prefs, release);
+            pendingUpdate = release.hasApk() ? release : null;
+            showUpdateBanner(prefs.latestRelease());
+        });
+    }
+
+    private void showUpdateBanner(String version) {
+        Updates.Step step = Updates.step(Updates.installedVersion(this), version);
+        if (step == Updates.Step.NONE) {
+            updateBanner.setVisibility(View.GONE);
+            settingsButton.setNextFocusDownId(R.id.query);
+            return;
+        }
+        updateBanner.setText(getString(step == Updates.Step.MAJOR
+                ? R.string.update_banner_major : R.string.update_banner, version));
+        updateBanner.setVisibility(View.VISIBLE);
+        settingsButton.setNextFocusDownId(R.id.update_banner);
+    }
+
+    /**
+     * OK on the banner. The stored version alone cannot be installed — it carries no
+     * download address — so a banner restored from the cache fetches the release first.
+     */
+    private void openUpdate() {
+        if (pendingUpdate != null) {
+            UpdatePrompt.offer(this, pendingUpdate, status::setText);
+            return;
+        }
+        status.setText(R.string.update_checking);
+        Ui.background(this, Updates::latest, (release, error) -> {
+            if (error != null) {
+                status.setText(getString(R.string.update_check_failed, Ui.message(error)));
+                return;
+            }
+            Updates.remember(prefs, release);
+            showUpdateBanner(prefs.latestRelease());
+            if (!release.hasApk()) {
+                status.setText(getString(R.string.update_no_asset, release.version));
+                return;
+            }
+            pendingUpdate = release;
+            UpdatePrompt.offer(this, release, status::setText);
+        });
     }
 
     /** Down from the search row: the history strip when it is there, otherwise the results. */

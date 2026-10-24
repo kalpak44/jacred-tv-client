@@ -52,6 +52,23 @@
             android:text="@string/settings" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/update_banner"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/update_banner"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_vertical"
+        android:nextFocusUp="@id/settings_button"
+        android:nextFocusDown="@id/query"
+        android:paddingLeft="22dp"
+        android:paddingRight="22dp"
+        android:textAllCaps="false"
+        android:textColor="@color/update_text"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

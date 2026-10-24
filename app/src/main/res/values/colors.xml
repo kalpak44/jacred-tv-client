@@ -14,4 +14,7 @@
     <color name="chip_quality_text">#86B9FF</color>
     <color name="chip_voice_text">#C2A6FF</color>
     <color name="chip_quality_4k_text">#F7D070</color>
+    <!-- Amber, not mint: the update banner has to read as a notice rather than as
+         one more control in the row above it. -->
+    <color name="update">#F7C948</color>
 </resources>

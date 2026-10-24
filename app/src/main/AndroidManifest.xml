@@ -3,6 +3,21 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--
+      The app installs its own updates from its GitHub releases. Without this the
+      package installer refuses the session before the user is ever asked.
+    -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <!--
+      Guards the install-status broadcast the package installer sends back. Signature
+      level, so only this app can deliver one: without it the receiver is reachable by
+      any app on the device, and what it carries is an intent this app then launches.
+    -->
+    <permission
+        android:name="tv.jacred.client.permission.INSTALL_STATUS"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="tv.jacred.client.permission.INSTALL_STATUS" />
 
     <uses-feature
         android:name="android.software.leanback"

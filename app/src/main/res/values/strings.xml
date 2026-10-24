@@ -117,4 +117,30 @@
     <string name="test_failed">TorrServer unreachable: %1$s</string>
     <string name="import_ok">Imported TMDB settings from TorrServer.</string>
     <string name="import_no_key">TorrServer has no TMDB key stored — enter one above.</string>
+
+    <string name="check_updates">Check for updates</string>
+    <string name="settings_version">Version %1$s</string>
+    <string name="update_checking">Asking GitHub for the latest release…</string>
+    <string name="update_current">Up to date — %1$s is the newest release.</string>
+    <string name="update_check_failed">Could not reach GitHub: %1$s</string>
+    <string name="update_no_asset">Release %1$s has no APK attached to it.</string>
+    <!-- The banner is a notice first and a button second, so it says what it is before
+         it says what OK does. -->
+    <string name="update_banner">Update available — %1$s  ·  press OK to install</string>
+    <string name="update_banner_major">Major update available — %1$s  ·  press OK to install</string>
+    <string name="update_title">Update to %1$s</string>
+    <string name="update_subtitle">Installed %1$s  ·  download %2$s</string>
+    <string name="update_subtitle_unsized">Installed %1$s</string>
+    <string name="update_install">Download and install</string>
+    <string name="update_later">Later</string>
+    <string name="update_downloading">Downloading %1$s — %2$d%%</string>
+    <string name="update_download_failed">Download failed: %1$s</string>
+    <string name="update_opening_installer">Opening the installer…</string>
+    <!-- Android 8 and newer gate sideloading behind a per-app permission, and the app
+         cannot grant it to itself. -->
+    <string name="update_allow_title">Allow installs from JacRed TV</string>
+    <string name="update_allow_message">Android asks for this once before an app can install an update. Turn JacRed TV on in the list that opens, then press Back and try again.</string>
+    <string name="update_allow_open">Open the setting</string>
+    <string name="update_allow_cancel">Not now</string>
+    <string name="update_allow_missing">This device has no screen for that setting — install the APK over adb instead.</string>
 </resources>

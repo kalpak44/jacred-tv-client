@@ -42,6 +42,8 @@ public class SettingsActivity extends Activity {
         tmdbImageField = findViewById(R.id.tmdb_image_field);
         playerButton = findViewById(R.id.player_button);
         testResult = findViewById(R.id.test_result);
+        ((TextView) findViewById(R.id.version_label)).setText(
+                getString(R.string.settings_version, Updates.installedVersion(this)));
 
         apiField.setText(prefs.apiUrl());
         serverField.setText(prefs.torrServerUrl());
@@ -64,6 +66,7 @@ public class SettingsActivity extends Activity {
         ((Button) findViewById(R.id.import_button)).setOnClickListener(view -> importFromServer());
         ((Button) findViewById(R.id.mirror_button)).setOnClickListener(view ->
                 tmdbImageField.setText(Prefs.MIRROR_TMDB_IMAGES));
+        ((Button) findViewById(R.id.update_button)).setOnClickListener(view -> checkUpdates());
         ((Button) findViewById(R.id.clear_history_button)).setOnClickListener(view -> {
             new History(prefs).clear();
             Toast.makeText(this, R.string.history_cleared, Toast.LENGTH_SHORT).show();
@@ -111,6 +114,31 @@ public class SettingsActivity extends Activity {
                 testResult.setText(getString(R.string.test_ok,
                         version.isEmpty() ? "?" : version));
             }
+        });
+    }
+
+    /**
+     * Asks GitHub for the newest release regardless of when the home screen last looked,
+     * because someone pressing this wants an answer now rather than a cached one.
+     */
+    private void checkUpdates() {
+        testResult.setText(R.string.update_checking);
+        Ui.background(this, Updates::latest, (release, error) -> {
+            if (error != null) {
+                testResult.setText(getString(R.string.update_check_failed, Ui.message(error)));
+                return;
+            }
+            Updates.remember(prefs, release);
+            if (Updates.step(Updates.installedVersion(this), release.version)
+                    == Updates.Step.NONE) {
+                testResult.setText(getString(R.string.update_current, release.version));
+                return;
+            }
+            if (!release.hasApk()) {
+                testResult.setText(getString(R.string.update_no_asset, release.version));
+                return;
+            }
+            UpdatePrompt.offer(this, release, testResult::setText);
         });
     }
 
