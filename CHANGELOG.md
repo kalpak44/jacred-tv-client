@@ -6,6 +6,11 @@ tag, so keep this a flat `## [X.Y.Z]` list — it inserts above the first such
 heading, and a different structure either breaks the insert or gets corrupted by
 it.
 
+## [1.0.2]
+
+- Delete the downloaded APK once the installer has read it, so a cancelled update does
+  not leave it in the cache.
+
 ## [1.0.1]
 
 - Check for updates from Settings, and show a banner on the home screen when a newer

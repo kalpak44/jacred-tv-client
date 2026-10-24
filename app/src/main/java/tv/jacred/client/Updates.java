@@ -288,6 +288,11 @@ final class Updates {
                     PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE)
                     .getIntentSender());
         }
+        // The session holds its own copy from here on, so the cached download is dead
+        // weight — and an update the user then cancels would leave it there for good.
+        if (!apk.delete()) {
+            apk.deleteOnExit();
+        }
     }
 
     /**
