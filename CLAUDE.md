@@ -71,7 +71,8 @@ framework type at all. Reach for a framework API, never an AndroidX one.
 
 The app offers its own releases: Settings has a **Check for updates** button, and the home
 screen shows a banner when `releases/latest` carries a newer `versionName`. The APK is
-downloaded from the release asset and handed to `PackageInstaller`, which is what lets a
+downloaded from the release asset and handed to `PackageInstaller`, and the dialog shows
+that version's `CHANGELOG.md` entry read from the tag. `PackageInstaller`, which is what lets a
 failure reach the screen — there is nowhere to read a log on a TV.
 
 Android replaces an installed app only when the new APK carries the same signature, so

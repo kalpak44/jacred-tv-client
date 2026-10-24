@@ -43,6 +43,17 @@ final class Updates {
      */
     private static final long CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000L;
 
+    /**
+     * The changelog as it stood at the tag, which is what the release describes. Read from
+     * the file rather than from the release body: the body is generated from commit
+     * subjects, and the entry here is the one written for a reader.
+     */
+    private static final String CHANGELOG =
+            "https://raw.githubusercontent.com/kalpak44/jacred-tv-client/%s/CHANGELOG.md";
+
+    /** Enough of an entry to tell someone what a release is; the rest is on the web. */
+    private static final int MAX_NOTE_LINES = 8;
+
     private static final String INSTALL_STATUS = "tv.jacred.client.INSTALL_STATUS";
 
     /** Declared in the manifest at signature level; see the receiver below. */
@@ -175,6 +186,52 @@ final class Updates {
             }
         }
         return numbers;
+    }
+
+    /**
+     * The changelog entry for a release, or an empty string when there is none to show.
+     * Blocking; callers must stay off the main thread.
+     */
+    static String notes(Release release) throws Exception {
+        return section(Http.get(String.format(CHANGELOG, release.tag), "", ""), release.version);
+    }
+
+    /**
+     * The lines under {@code ## [version]} up to the next heading. A release whose entry is
+     * missing returns nothing rather than the whole file, which would be every version at
+     * once.
+     */
+    static String section(String markdown, String version) {
+        String heading = "## [" + version + "]";
+        StringBuilder entry = new StringBuilder();
+        boolean inside = false;
+        int lines = 0;
+        for (String line : markdown.split("\n")) {
+            String trimmed = line.trim();
+            if (trimmed.startsWith("## ")) {
+                if (inside) {
+                    break;
+                }
+                inside = trimmed.startsWith(heading);
+                continue;
+            }
+            if (!inside || trimmed.isEmpty()) {
+                continue;
+            }
+            // A bullet wrapped across source lines is one bullet on screen, where the
+            // column width is nothing like the file's.
+            boolean continuation = entry.length() > 0
+                    && !trimmed.startsWith("-") && !trimmed.startsWith("*");
+            if (continuation) {
+                entry.append(' ').append(trimmed);
+                continue;
+            }
+            if (lines++ >= MAX_NOTE_LINES) {
+                break;
+            }
+            entry.append(entry.length() == 0 ? "" : "\n").append(trimmed);
+        }
+        return entry.toString();
     }
 
     // --- The cached answer the home screen reads ---------------------------------------

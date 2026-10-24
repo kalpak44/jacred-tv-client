@@ -6,6 +6,12 @@ tag, so keep this a flat `## [X.Y.Z]` list — it inserts above the first such
 heading, and a different structure either breaks the insert or gets corrupted by
 it.
 
+## [1.0.3]
+
+- Show the release's changelog entry in the update dialog, so an update says what it
+  changes before it is installed.
+- Show the running version on the home screen beside the TorrServer chip.
+
 ## [1.0.2]
 
 - Delete the downloaded APK once the installer has read it, so a cancelled update does

@@ -120,6 +120,7 @@
 
     <string name="check_updates">Check for updates</string>
     <string name="settings_version">Version %1$s</string>
+    <string name="version_chip">v%1$s</string>
     <string name="update_checking">Asking GitHub for the latest release…</string>
     <string name="update_current">Up to date — %1$s is the newest release.</string>
     <string name="update_check_failed">Could not reach GitHub: %1$s</string>

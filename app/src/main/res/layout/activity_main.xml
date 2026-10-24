@@ -36,6 +36,18 @@
             android:textColor="@color/text_muted"
             android:textSize="13sp" />
 
+        <TextView
+            android:id="@+id/version_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/chip_background"
+            android:gravity="center"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:textColor="@color/text_muted"
+            android:textSize="13sp" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"

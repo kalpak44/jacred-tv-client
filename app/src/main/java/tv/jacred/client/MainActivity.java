@@ -68,6 +68,8 @@ public class MainActivity extends Activity {
         queryField = findViewById(R.id.query);
         status = findViewById(R.id.status);
         serverChip = findViewById(R.id.server_chip);
+        ((TextView) findViewById(R.id.version_chip)).setText(
+                getString(R.string.version_chip, Updates.installedVersion(this)));
         grid = findViewById(R.id.movies);
         emptyState = findViewById(R.id.empty_state);
         historySection = findViewById(R.id.history_section);

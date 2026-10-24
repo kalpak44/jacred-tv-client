@@ -18,11 +18,23 @@ final class UpdatePrompt {
      */
     static void offer(final Activity activity, final Updates.Release release,
                       final Updates.Status status) {
+        // The changelog is a second request, so the modal waits for it rather than opening
+        // and growing a paragraph under the reader's hands. A release with no entry — or a
+        // file that cannot be read — simply shows none.
+        Ui.background(activity, () -> Updates.notes(release),
+                (notes, error) -> show(activity, release, status, error == null ? notes : ""));
+    }
+
+    private static void show(final Activity activity, final Updates.Release release,
+                             final Updates.Status status, String notes) {
         String installed = Updates.installedVersion(activity);
         String subtitle = release.apkBytes > 0
                 ? activity.getString(R.string.update_subtitle, installed,
                 Torrent.humanSize(release.apkBytes))
                 : activity.getString(R.string.update_subtitle_unsized, installed);
+        if (!notes.isEmpty()) {
+            subtitle = subtitle + "\n\n" + notes;
+        }
 
         TvDialog.create(activity, activity.getString(R.string.update_title, release.version),
                 subtitle)
