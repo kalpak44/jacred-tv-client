@@ -6,6 +6,11 @@ tag, so keep this a flat `## [X.Y.Z]` list — it inserts above the first such
 heading, and a different structure either breaks the insert or gets corrupted by
 it.
 
+## [1.2.1]
+
+- No change to the app itself; released to confirm the build and signing pipeline
+  still produces an installable update after its GitHub Actions were bumped.
+
 ## [1.2.0]
 
 - Translate the interface into Russian, chosen by the television's own locale.
