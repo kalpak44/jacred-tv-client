@@ -52,6 +52,23 @@
             android:src="@drawable/ic_settings" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/update_banner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/control_height"
+        android:layout_marginTop="@dimen/space_l"
+        android:background="@drawable/update_banner"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_vertical"
+        android:nextFocusDown="@id/query"
+        android:nextFocusUp="@id/settings_button"
+        android:paddingLeft="@dimen/space_xl"
+        android:paddingRight="@dimen/space_xl"
+        android:textAllCaps="false"
+        android:textColor="@color/update_text"
+        android:textSize="@dimen/text_body"
+        android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,23 +96,6 @@
             android:nextFocusUp="@id/settings_button"
             android:text="@string/search" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/update_banner"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/control_height"
-        android:layout_marginTop="@dimen/space_m"
-        android:background="@drawable/update_banner"
-        android:fontFamily="sans-serif-medium"
-        android:gravity="center_vertical"
-        android:nextFocusDown="@id/query"
-        android:nextFocusUp="@id/settings_button"
-        android:paddingLeft="@dimen/space_xl"
-        android:paddingRight="@dimen/space_xl"
-        android:textAllCaps="false"
-        android:textColor="@color/update_text"
-        android:textSize="@dimen/text_body"
-        android:visibility="gone" />
 
     <TextView
         android:id="@+id/status"

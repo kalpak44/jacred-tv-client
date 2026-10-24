@@ -6,6 +6,11 @@ tag, so keep this a flat `## [X.Y.Z]` list — it inserts above the first such
 heading, and a different structure either breaks the insert or gets corrupted by
 it.
 
+## [1.1.2]
+
+- Move the update banner above the search box, so pressing up from the search box moves
+  up the screen rather than down onto it.
+
 ## [1.1.1]
 
 - Look for a new release once on launch, so the home-screen banner appears on the way in
