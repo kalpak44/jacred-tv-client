@@ -1,6 +1,7 @@
 package tv.jacred.client;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +21,13 @@ import java.util.List;
 
 /** Sends one magnet to TorrServer, shows its files alongside TMDB artwork, and plays them. */
 public class DetailActivity extends Activity {
+    // Resources are resolved when the context is built, so the language has to be applied
+    // here rather than in onCreate.
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(Locales.wrap(base));
+    }
+
     static final String EXTRA_TITLE = "title";
     static final String EXTRA_MAGNET = "magnet";
     static final String EXTRA_SUBTITLE = "subtitle";

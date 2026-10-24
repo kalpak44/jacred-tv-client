@@ -1,6 +1,7 @@
 package tv.jacred.client;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,6 +26,13 @@ import java.util.List;
  * remote, and no repeat requests to a host that rate-limits them.
  */
 public class ReleasesActivity extends Activity {
+    // Resources are resolved when the context is built, so the language has to be applied
+    // here rather than in onCreate.
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(Locales.wrap(base));
+    }
+
     static final String EXTRA_QUERY = "query";
     static final String EXTRA_TITLE = "title";
     static final String EXTRA_ORIGINAL = "original";

@@ -1,6 +1,7 @@
 package tv.jacred.client;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,6 +18,13 @@ import java.util.List;
 
 /** jac.red address, TorrServer connection, TMDB artwork and the default video player. */
 public class SettingsActivity extends Activity {
+    // Resources are resolved when the context is built, so the language has to be applied
+    // here rather than in onCreate.
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(Locales.wrap(base));
+    }
+
     private Prefs prefs;
     private EditText apiField;
     private EditText serverField;
@@ -26,6 +34,7 @@ public class SettingsActivity extends Activity {
     private EditText tmdbApiField;
     private EditText tmdbImageField;
     private Button playerButton;
+    private Button languageButton;
     private TextView testResult;
 
     @Override
@@ -43,6 +52,7 @@ public class SettingsActivity extends Activity {
         tmdbApiField = findViewById(R.id.tmdb_api_field);
         tmdbImageField = findViewById(R.id.tmdb_image_field);
         playerButton = findViewById(R.id.player_button);
+        languageButton = findViewById(R.id.language_button);
         testResult = findViewById(R.id.test_result);
         ((TextView) findViewById(R.id.version_label)).setText(
                 getString(R.string.settings_version, Updates.installedVersion(this)));
@@ -55,6 +65,7 @@ public class SettingsActivity extends Activity {
         tmdbApiField.setText(prefs.tmdbApiUrl());
         tmdbImageField.setText(prefs.tmdbImageUrl());
         updatePlayerButton();
+        updateLanguageButton();
 
         // While the leanback keyboard is up it swallows the D-pad, so fields never open it by
         // themselves: focus moves freely and OK starts editing.
@@ -64,6 +75,7 @@ public class SettingsActivity extends Activity {
         }
 
         playerButton.setOnClickListener(view -> pickPlayer());
+        languageButton.setOnClickListener(view -> pickLanguage());
         ((Button) findViewById(R.id.test_button)).setOnClickListener(view -> testConnection());
         ((Button) findViewById(R.id.import_button)).setOnClickListener(view -> importFromServer());
         ((Button) findViewById(R.id.mirror_button)).setOnClickListener(view ->
@@ -200,6 +212,36 @@ public class SettingsActivity extends Activity {
             }
         }
         return "";
+    }
+
+    /**
+     * Changing the language rebuilds this screen, because its resources were resolved when
+     * its context was built. The screens underneath notice on the way back to them.
+     */
+    private void pickLanguage() {
+        final String[] tags = {Locales.SYSTEM, Locales.ENGLISH, Locales.RUSSIAN};
+        TvDialog picker = TvDialog.create(this, getString(R.string.settings_language),
+                getString(R.string.settings_language_hint));
+        picker.add(getString(R.string.language_system), null, null);
+        picker.add(getString(R.string.language_en), null, null);
+        picker.add(getString(R.string.language_ru), null, null);
+        picker.onPick(index -> {
+            if (!tags[index].equals(prefs.language())) {
+                // Typed-in fields would be lost to the rebuild otherwise.
+                save();
+                prefs.set(Prefs.LANGUAGE, tags[index]);
+                recreate();
+            }
+            return true;
+        }).show();
+    }
+
+    private void updateLanguageButton() {
+        String tag = prefs.language();
+        int label = Locales.ENGLISH.equals(tag) ? R.string.language_en
+                : Locales.RUSSIAN.equals(tag) ? R.string.language_ru
+                : R.string.language_system;
+        languageButton.setText(label);
     }
 
     private void pickPlayer() {

@@ -17,6 +17,7 @@ The app has no third-party dependencies: Android framework, `org.json` and
 | Min / target SDK | 28 / 34 |
 | Permissions | `INTERNET`, `ACCESS_NETWORK_STATE` |
 | Launcher | Android TV Leanback, landscape |
+| Languages | English and Russian, chosen by the television's own locale |
 
 ## Screens
 

@@ -173,6 +173,23 @@
 
         <TextView
             style="@style/FieldLabel"
+            android:text="@string/settings_language" />
+
+        <Button
+            android:id="@+id/language_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/control_height_l"
+            android:layout_marginTop="@dimen/space_s"
+            android:background="@drawable/field_background"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/space_xl"
+            android:paddingRight="@dimen/space_xl"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_subtitle" />
+
+        <TextView
+            style="@style/FieldLabel"
             android:text="@string/settings_player" />
 
         <Button

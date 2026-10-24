@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Russian. Selected by the system locale, so the app follows the television's own language
+  setting and has nothing to configure. Brand names, URLs and pure format strings are
+  marked translatable="false" in values/strings.xml and are deliberately absent here.
+-->
+<resources>
+    <string name="search">Поиск</string>
+    <string name="search_hint">Название для поиска на jac.red</string>
+    <string name="settings">Настройки</string>
+    <string name="save">Сохранить</string>
+    <string name="recent">Недавно просмотренное</string>
+    <string name="test_connection">Проверить TorrServer</string>
+    <string name="import_from_server">Импорт TMDB из TorrServer</string>
+    <string name="use_image_mirror">Зеркало изображений</string>
+    <string name="clear_history">Очистить историю</string>
+    <string name="history_cleared">История очищена.</string>
+    <string name="open_magnet">Открыть magnet</string>
+    <string name="remove_from_server">Удалить с сервера</string>
+    <string name="watch">▶  Смотреть</string>
+    <string name="keep_on_server">Оставить на сервере</string>
+    <string name="status_kept">Сохранено в библиотеке TorrServer.</string>
+    <string name="status_keep_failed">Не удалось сохранить: %1$s</string>
+    <string name="status_nothing_playable">В этом торренте нет видеофайла.</string>
+
+    <string name="chip_checking">Проверяем TorrServer…</string>
+    <string name="chip_online">TorrServer %1$s</string>
+    <string name="chip_offline">TorrServer недоступен</string>
+
+    <string name="facet_type">Тип</string>
+    <string name="facet_tracker">Трекер</string>
+    <string name="facet_voice">Озвучка</string>
+    <string name="facet_video">Видео</string>
+    <string name="facet_codec">Кодек</string>
+    <string name="facet_quality">Качество</string>
+    <string name="facet_year">Год</string>
+    <string name="facet_season">Сезон</string>
+    <string name="facet_all">Все</string>
+    <string name="facet_pick">Уточнить по: %1$s</string>
+    <string name="source_chip">API: %1$s</string>
+    <string name="source_native">Основной</string>
+    <string name="sort_by_seeds">↑ По сидам</string>
+    <string name="sort_by_size">По размеру</string>
+    <string name="sort_added">По дате добавления</string>
+    <string name="sort_updated">По дате обновления</string>
+
+    <string name="status_idle">Введите название и нажмите «Поиск», чтобы открыть его в TMDB.</string>
+    <string name="status_idle_no_tmdb">Введите название и нажмите «Поиск». Добавьте ключ TMDB в настройках, чтобы видеть постеры и описания.</string>
+    <string name="status_searching_tmdb">Ищем \"%1$s\" в TMDB…</string>
+    <string name="status_tmdb_failed">Не удалось получить данные TMDB: %1$s</string>
+    <string name="status_no_titles">TMDB не знает ничего с названием \"%1$s\" — ищем прямо на jac.red.</string>
+    <string name="status_titles">%1$d названий — нажмите OK на одном, чтобы увидеть релизы</string>
+    <string name="series">Сериал</string>
+    <string name="exit_title">Выйти из JacRed TV?</string>
+    <string name="exit_message">Воспроизведение, уже запущенное на TorrServer, продолжится.</string>
+    <string name="exit_stay">Остаться</string>
+    <string name="exit_confirm">Выйти</string>
+    <string name="empty_state">Найдите фильм или сериал, выберите релиз,\nи он пойдёт через TorrServer.</string>
+    <string name="no_tmdb_hint">Нет постера и описания: добавьте ключ API TMDB в настройках.</string>
+    <string name="status_enter_query">Сначала введите, что искать.</string>
+    <string name="status_searching">Ищем \"%1$s\" на jac.red…</string>
+    <string name="status_search_failed">Поиск не удался: %1$s</string>
+    <string name="status_no_results">Ничего не найдено по запросу \"%1$s\".</string>
+    <string name="status_results">%1$d результатов по запросу \"%2$s\"</string>
+    <string name="status_results_filtered">%1$d из %2$d результатов по запросу \"%3$s\"</string>
+    <string name="status_filtered_empty">Ни один релиз не подходит под эти фильтры. Нажмите OK на фильтре, чтобы ослабить его.</string>
+
+    <string name="status_no_torrserver">Адрес TorrServer не указан. Добавьте его в настройках, чтобы смотреть этот торрент.</string>
+    <string name="status_adding">Добавляем magnet в TorrServer на %1$s…</string>
+    <string name="status_add_failed">TorrServer отклонил magnet: %1$s</string>
+    <string name="status_connecting">подключаемся к раздаче</string>
+    <string name="stats_speed">▼ %1$s/с</string>
+    <string name="stats_peers">%1$d пиров</string>
+    <string name="stats_buffer">буфер %1$s</string>
+    <string name="stats_buffer_of">буфер %1$s из %2$s</string>
+    <string name="stats_idle">простой — TorrServer пока ничего не качает</string>
+    <string name="status_waiting">%1$s — ждём список файлов…</string>
+    <string name="status_files_failed">Не удалось прочитать список файлов: %1$s</string>
+    <string name="status_metadata_timeout">Метаданные не пришли — у этого торрента сейчас нет доступных сидов. Вернитесь и выберите другой релиз.</string>
+    <string name="status_files">%1$d из %2$d файлов можно смотреть — нажмите OK, чтобы запустить</string>
+    <string name="status_files_watched">%1$d из %2$d файлов можно смотреть — %3$d уже просмотрено</string>
+    <string name="hold_for_options">Удерживайте OK на файле, чтобы запустить его или изменить отметку о просмотре.</string>
+    <string name="file_menu_play">▶  Воспроизвести файл</string>
+    <string name="file_menu_mark">Отметить просмотренным</string>
+    <string name="file_menu_unmark">Снять отметку о просмотре</string>
+    <string name="toast_marked">Отмечено просмотренным: %1$s</string>
+    <string name="toast_unmarked">Отметка снята: %1$s</string>
+    <string name="history_play">Смотреть снова</string>
+    <string name="history_remove">Убрать из недавних</string>
+    <string name="status_play_failed">Не удалось запустить плеер: %1$s</string>
+    <string name="status_opening">Поднимаем торрент на TorrServer…</string>
+    <string name="status_removed">Удалено с TorrServer.</string>
+    <string name="status_no_magnet_handler">На этом устройстве нет приложения для magnet-ссылок.</string>
+    <string name="file_not_video">не видео</string>
+    <string name="file_watched">просмотрено</string>
+
+    <string name="dialog_pick_player">Открыть в</string>
+    <string name="player_always_ask">Спрашивать каждый раз</string>
+
+    <string name="settings_api">Адрес API jac.red</string>
+    <string name="settings_torrserver">Адрес TorrServer</string>
+    <string name="settings_user">Пользователь TorrServer (необязательно)</string>
+    <string name="settings_pass">Пароль TorrServer (необязательно)</string>
+    <string name="settings_tmdb_key">Ключ API TMDB (постеры и описания)</string>
+    <string name="settings_tmdb_key_hint">Оставьте пустым, чтобы работать без обложек</string>
+    <string name="settings_tmdb_api">Адрес API TMDB</string>
+    <string name="settings_tmdb_images">Адрес изображений TMDB</string>
+    <string name="settings_language">Язык интерфейса</string>
+    <string name="settings_language_hint">Заменяет язык, выбранный на телевизоре.</string>
+    <string name="language_system">Как на телевизоре</string>
+    <string name="settings_player">Плеер по умолчанию</string>
+    <string name="settings_player_hint">Приложения на этом устройстве, которые умеют открыть видеопоток.</string>
+
+    <string name="test_no_address">Сначала введите адрес TorrServer.</string>
+    <string name="test_running">Соединяемся с %1$s…</string>
+    <string name="test_ok">TorrServer доступен — версия %1$s</string>
+    <string name="test_failed">TorrServer недоступен: %1$s</string>
+    <string name="import_ok">Настройки TMDB импортированы из TorrServer.</string>
+    <string name="import_no_key">В TorrServer не сохранён ключ TMDB — введите его выше.</string>
+
+    <string name="check_updates">Проверить обновления</string>
+    <string name="settings_version">Версия %1$s</string>
+    <string name="update_checking">Запрашиваем последний релиз у GitHub…</string>
+    <string name="update_current">Обновлений нет — %1$s уже последняя версия.</string>
+    <string name="update_check_failed">Не удалось связаться с GitHub: %1$s</string>
+    <string name="update_no_asset">К релизу %1$s не приложен APK.</string>
+    <string name="update_banner">Доступно обновление — %1$s  ·  нажмите OK, чтобы установить</string>
+    <string name="update_banner_major">Доступно крупное обновление — %1$s  ·  нажмите OK, чтобы установить</string>
+    <string name="update_title">Обновление до %1$s</string>
+    <string name="update_subtitle">Установлена %1$s  ·  загрузка %2$s</string>
+    <string name="update_subtitle_unsized">Установлена %1$s</string>
+    <string name="update_install">Загрузить и установить</string>
+    <string name="update_later">Позже</string>
+    <string name="update_downloading">Загрузка %1$s — %2$d%%</string>
+    <string name="update_download_failed">Загрузка не удалась: %1$s</string>
+    <string name="update_opening_installer">Открываем установщик…</string>
+    <string name="update_allow_title">Разрешить установку из JacRed TV</string>
+    <string name="update_allow_message">Android спрашивает это один раз, прежде чем приложение сможет установить обновление. Включите JacRed TV в открывшемся списке, затем нажмите «Назад» и повторите.</string>
+    <string name="update_allow_open">Открыть настройку</string>
+    <string name="update_allow_cancel">Не сейчас</string>
+    <string name="update_allow_missing">На этом устройстве нет такого экрана настроек — установите APK через adb.</string>
+</resources>

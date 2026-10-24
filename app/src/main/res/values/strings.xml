@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">JacRed TV</string>
+    <string name="app_name" translatable="false">JacRed TV</string>
     <string name="search">Search</string>
     <string name="search_hint">Title to search on jac.red</string>
     <string name="settings">Settings</string>
@@ -32,11 +32,11 @@
     <string name="facet_year">Year</string>
     <string name="facet_season">Season</string>
     <string name="facet_all">All</string>
-    <string name="facet_chip">%1$s: %2$s</string>
+    <string name="facet_chip" translatable="false">%1$s: %2$s</string>
     <string name="facet_pick">Narrow by %1$s</string>
     <string name="source_chip">API: %1$s</string>
     <string name="source_native">Native</string>
-    <string name="source_jackett">Jackett</string>
+    <string name="source_jackett" translatable="false">Jackett</string>
     <string name="sort_by_seeds">↑ By seeds</string>
     <string name="sort_by_size">By size</string>
     <string name="sort_added">Date added</string>
@@ -92,22 +92,27 @@
     <string name="file_not_video">not video</string>
     <string name="file_watched">watched</string>
     <!-- A watched file keeps its tick in front of the name. -->
-    <string name="file_name_watched">✓  %1$s</string>
-    <string name="tmdb_rating">TMDB %1$.1f</string>
+    <string name="file_name_watched" translatable="false">✓  %1$s</string>
+    <string name="tmdb_rating" translatable="false">TMDB %1$.1f</string>
 
     <string name="dialog_pick_player">Play with</string>
     <string name="player_always_ask">Ask every time</string>
 
     <string name="settings_api">jac.red API address</string>
-    <string name="settings_api_hint">https://jac.red</string>
+    <string name="settings_api_hint" translatable="false">https://jac.red</string>
     <string name="settings_torrserver">TorrServer address</string>
-    <string name="settings_torrserver_hint">http://192.168.1.7:5665</string>
+    <string name="settings_torrserver_hint" translatable="false">http://192.168.1.7:5665</string>
     <string name="settings_user">TorrServer user (optional)</string>
     <string name="settings_pass">TorrServer password (optional)</string>
     <string name="settings_tmdb_key">TMDB API key (for posters and plots)</string>
     <string name="settings_tmdb_key_hint">Leave empty to run without artwork</string>
     <string name="settings_tmdb_api">TMDB API address</string>
     <string name="settings_tmdb_images">TMDB image address</string>
+    <string name="settings_language">Interface language</string>
+    <string name="settings_language_hint">Overrides the language the television is set to.</string>
+    <string name="language_system">Follow the television</string>
+    <string name="language_en" translatable="false">English</string>
+    <string name="language_ru" translatable="false">Русский</string>
     <string name="settings_player">Default video player</string>
     <string name="settings_player_hint">Apps on this device that can open a video stream.</string>
 
@@ -120,7 +125,7 @@
 
     <string name="check_updates">Check for updates</string>
     <string name="settings_version">Version %1$s</string>
-    <string name="version_chip">v%1$s</string>
+    <string name="version_chip" translatable="false">v%1$s</string>
     <string name="update_checking">Asking GitHub for the latest release…</string>
     <string name="update_current">Up to date — %1$s is the newest release.</string>
     <string name="update_check_failed">Could not reach GitHub: %1$s</string>

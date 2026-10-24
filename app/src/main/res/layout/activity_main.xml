@@ -114,23 +114,16 @@
             style="@style/SectionLabel"
             android:text="@string/recent" />
 
-        <!-- clipChildren off on the scroller and the row alike: the focused card scales
-             up, and is otherwise cropped by whichever of them is tighter. -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_m"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:paddingTop="@dimen/space_s"
-            android:paddingBottom="@dimen/space_s"
             android:scrollbars="none">
 
             <LinearLayout
                 android:id="@+id/history_row"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clipChildren="false"
                 android:orientation="horizontal" />
         </HorizontalScrollView>
     </LinearLayout>

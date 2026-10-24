@@ -1,6 +1,7 @@
 package tv.jacred.client;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -26,10 +27,19 @@ import java.util.List;
  * releases screen. Without a TMDB key the query goes straight to jac.red instead.
  */
 public class MainActivity extends Activity {
+    // Resources are resolved when the context is built, so the language has to be applied
+    // here rather than in onCreate.
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(Locales.wrap(base));
+    }
+
     /** Clicks this soon after the grid takes focus are a stray key-up, not a choice. */
     private static final long FOCUS_GRACE_MS = 400L;
 
     private long gridFocusedAt;
+    /** The language this screen was built in; see onResume. */
+    private String builtInLanguage;
     private Prefs prefs;
     private History history;
     private Tmdb tmdb;
@@ -61,6 +71,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         prefs = new Prefs(this);
+        builtInLanguage = prefs.language();
         history = new History(prefs);
         tmdb = new Tmdb(prefs);
         ImageLoader.init(this);
@@ -189,6 +200,12 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        // Settings can change the language while this screen sits underneath it, and a
+        // screen keeps the resources it was built with.
+        if (!builtInLanguage.equals(prefs.language())) {
+            recreate();
+            return;
+        }
         tmdb = new Tmdb(prefs);
         status.setText(tmdb.isConfigured() ? getString(R.string.status_idle)
                 : getString(R.string.status_idle_no_tmdb));

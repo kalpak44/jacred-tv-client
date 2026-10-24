@@ -6,6 +6,12 @@ tag, so keep this a flat `## [X.Y.Z]` list — it inserts above the first such
 heading, and a different structure either breaks the insert or gets corrupted by
 it.
 
+## [1.2.0]
+
+- Translate the interface into Russian, chosen by the television's own locale.
+- Add an interface language setting, for when the app should not follow the television.
+- Stop the focus ring being clipped off the recently-watched card when it is selected.
+
 ## [1.1.2]
 
 - Move the update banner above the search box, so pressing up from the search box moves

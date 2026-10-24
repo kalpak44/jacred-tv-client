@@ -23,6 +23,7 @@ final class Prefs {
     static final String PLAYER_LABEL = "player_label";
     static final String HISTORY = "history";
     static final String SOURCE = "source";
+    static final String LANGUAGE = "language";
     static final String UPDATE_LATEST = "update_latest";
     static final String UPDATE_CHECKED = "update_checked";
 
@@ -75,6 +76,11 @@ final class Prefs {
 
     String playerLabel() {
         return get(PLAYER_LABEL, "");
+    }
+
+    /** Language tag overriding the system locale, or empty to follow it. */
+    String language() {
+        return get(LANGUAGE, Locales.SYSTEM);
     }
 
     /** Newest release seen by the last check, so the banner survives a restart. */

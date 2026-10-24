@@ -26,7 +26,7 @@ and `HttpURLConnection` — so Gradle never needs to resolve external artifacts.
 
 ### Code map
 
-Four activities and sixteen helpers, all in `tv.jacred.client`. The project
+Four activities and seventeen helpers, all in `tv.jacred.client`. The project
 sets `android.useAndroidX=false`, so the activities extend plain
 `android.app.Activity`, not `AppCompatActivity`, and no helper subclasses a
 framework type at all. Reach for a framework API, never an AndroidX one.
@@ -46,6 +46,7 @@ framework type at all. Reach for a framework API, never an AndroidX one.
 | `Players` | Discovers installed video players and hands a stream to one |
 | `Updates` | Reads the newest GitHub release, compares versions, downloads and installs the APK |
 | `UpdatePrompt` | The modal behind both ways into an update — the banner and the Settings button |
+| `Locales` | Applies the chosen interface language by wrapping each activity's base context |
 | `Ui` | Background-work helper and named thread factory |
 | `TvDialog` | D-pad-navigable dialog |
 | `ImageLoader` | Async poster loading into an `ImageView` |
@@ -99,7 +100,11 @@ heuristic.
 - Orientation: landscape
 - Minimum SDK: 28
 - Target/compile SDK: 34
-- Permissions: `INTERNET`, `ACCESS_NETWORK_STATE`
+- Permissions: `INTERNET`, `ACCESS_NETWORK_STATE`, `REQUEST_INSTALL_PACKAGES`
+- Languages: English in `values/`, Russian in `values-ru/`, picked by the system
+  locale, or by the language set in Settings when it overrides it. Lint's
+  `MissingTranslation` is a build gate, so a new string needs both —
+  or `translatable="false"` when it is a brand, a URL or a bare format string
 - Java source/target compatibility: 17
 - Release build: R8 minify plus resource shrinking, signed from
   `keystore.properties` when that file exists (see README)
