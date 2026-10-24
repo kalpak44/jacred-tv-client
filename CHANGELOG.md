@@ -6,6 +6,13 @@ tag, so keep this a flat `## [X.Y.Z]` list — it inserts above the first such
 heading, and a different structure either breaks the insert or gets corrupted by
 it.
 
+## [1.1.1]
+
+- Look for a new release once on launch, so the home-screen banner appears on the way in
+  rather than up to six hours later.
+- Replace the Settings button with a round gear, so the heaviest thing in the header is no
+  longer the one control nobody is looking for.
+
 ## [1.1.0]
 
 - Rework the interface against one spacing, type and focus scale, so focus means the same

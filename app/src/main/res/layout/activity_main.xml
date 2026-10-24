@@ -39,13 +39,17 @@
             android:layout_height="1dp"
             android:layout_weight="1" />
 
-        <Button
+        <!-- Icon only: the word "Settings" made the heaviest element of the header the
+             one thing on it nobody is looking for. A gear needs no label. -->
+        <ImageButton
             android:id="@+id/settings_button"
-            style="@style/GhostButton"
-            android:drawableStart="@drawable/ic_settings"
-            android:drawablePadding="@dimen/space_m"
+            android:layout_width="@dimen/control_height"
+            android:layout_height="@dimen/control_height"
+            android:background="@drawable/icon_button"
+            android:contentDescription="@string/settings"
             android:nextFocusDown="@id/query"
-            android:text="@string/settings" />
+            android:scaleType="center"
+            android:src="@drawable/ic_settings" />
     </LinearLayout>
 
     <LinearLayout

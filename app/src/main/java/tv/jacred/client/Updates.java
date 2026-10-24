@@ -236,8 +236,20 @@ final class Updates {
 
     // --- The cached answer the home screen reads ---------------------------------------
 
-    /** True when the stored answer is old enough that the home screen should ask again. */
+    /**
+     * One check per launch regardless of the interval, then the interval after that. The
+     * interval alone is what the home screen asks on every return from a title, so without
+     * the launch check a release published since the last session goes unseen for hours —
+     * and the banner is the only thing that would have said so.
+     */
+    private static boolean checkedThisLaunch;
+
+    /** True when the home screen should ask GitHub again rather than read its cache. */
     static boolean checkDue(Prefs prefs) {
+        if (!checkedThisLaunch) {
+            checkedThisLaunch = true;
+            return true;
+        }
         return System.currentTimeMillis() - prefs.updateCheckedAt() > CHECK_INTERVAL_MS;
     }
 
