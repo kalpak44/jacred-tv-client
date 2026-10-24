@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/card_background"
+    android:background="@drawable/card_resting"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="@dimen/space_s">
 
     <ImageView
         android:id="@+id/movie_poster"
         android:layout_width="match_parent"
-        android:layout_height="222dp"
+        android:layout_height="200dp"
         android:background="@drawable/poster_placeholder"
         android:contentDescription="@string/app_name"
         android:scaleType="centerCrop" />
@@ -18,22 +18,22 @@
         android:id="@+id/movie_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/space_s"
         android:ellipsize="end"
         android:fontFamily="sans-serif-medium"
         android:maxLines="2"
         android:minLines="2"
         android:textColor="@android:color/white"
-        android:textSize="14sp" />
+        android:textSize="@dimen/text_label" />
 
     <TextView
         android:id="@+id/movie_meta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/space_xs"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/text_muted"
-        android:textSize="12sp" />
+        android:textSize="@dimen/text_caption" />
 
 </LinearLayout>

@@ -4,10 +4,10 @@
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:orientation="vertical"
-    android:paddingLeft="20dp"
-    android:paddingTop="13dp"
-    android:paddingRight="20dp"
-    android:paddingBottom="13dp">
+    android:paddingLeft="@dimen/space_xl"
+    android:paddingTop="@dimen/space_m"
+    android:paddingRight="@dimen/space_xl"
+    android:paddingBottom="@dimen/space_m">
 
     <TextView
         android:id="@+id/file_name"
@@ -16,14 +16,14 @@
         android:ellipsize="middle"
         android:maxLines="1"
         android:textColor="@android:color/white"
-        android:textSize="19sp" />
+        android:textSize="@dimen/text_subtitle" />
 
     <TextView
         android:id="@+id/file_meta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="@dimen/space_xs"
         android:textColor="@color/text_muted"
-        android:textSize="15sp" />
+        android:textSize="@dimen/text_label" />
 
 </LinearLayout>

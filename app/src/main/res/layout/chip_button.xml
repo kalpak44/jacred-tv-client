@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Height comes from FilterChip, not from here: an override is what let the sort and
+     facet bars drift apart from every other chip in the app. -->
 <Button xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/FilterChip"
-    android:layout_width="wrap_content"
-    android:layout_height="48dp" />
+    android:layout_width="wrap_content" />

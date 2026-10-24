@@ -18,6 +18,18 @@ The app has no third-party dependencies: Android framework, `org.json` and
 | Permissions | `INTERNET`, `ACCESS_NETWORK_STATE` |
 | Launcher | Android TV Leanback, landscape |
 
+## Screens
+
+| | |
+| --- | --- |
+| ![Home](docs/screenshots/01-home.png) **Home** — search box, TorrServer and version chips, recently-watched row | ![Titles](docs/screenshots/02-titles.png) **Titles** — TMDB poster wall for the query |
+| ![Releases](docs/screenshots/03-releases.png) **Releases** — jac.red results with sort and facet filters | ![Detail](docs/screenshots/04-detail.png) **Detail** — TorrServer file list, Watch / Keep / magnet |
+
+![Settings](docs/screenshots/05-settings.png)
+
+**Settings** — jac.red and TorrServer addresses, TMDB credentials, default player, and
+**Check for updates**. Captured on the Mi Box at 1080p; the TMDB key is painted out.
+
 ## Requirements
 
 - JDK 17 and the Android SDK (platform 34, build-tools). Android Studio brings both.

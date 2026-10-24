@@ -9,10 +9,10 @@
         android:layout_gravity="center"
         android:background="@drawable/dialog_background"
         android:orientation="vertical"
-        android:paddingLeft="36dp"
-        android:paddingTop="32dp"
-        android:paddingRight="36dp"
-        android:paddingBottom="28dp">
+        android:paddingLeft="@dimen/space_xxl"
+        android:paddingTop="@dimen/space_xxl"
+        android:paddingRight="@dimen/space_xxl"
+        android:paddingBottom="@dimen/space_xl">
 
         <TextView
             android:id="@+id/dialog_title"
@@ -20,20 +20,21 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:textColor="@android:color/white"
-            android:textSize="26sp" />
+            android:textSize="@dimen/text_title" />
 
         <TextView
             android:id="@+id/dialog_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:textColor="@color/text_muted"
-            android:textSize="15sp" />
+            android:layout_marginTop="@dimen/space_s"
+            android:lineSpacingExtra="@dimen/space_xs"
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/text_body" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="@dimen/space_xl"
             android:maxHeight="560dp"
             android:scrollbars="none">
 

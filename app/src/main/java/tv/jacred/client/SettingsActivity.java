@@ -2,6 +2,8 @@ package tv.jacred.client;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -81,6 +83,24 @@ public class SettingsActivity extends Activity {
 
     private void typeOnOk(final EditText field) {
         field.setShowSoftInputOnFocus(false);
+        // A focused EditText consumes up and down for its own cursor before the framework
+        // looks for a neighbour, which strands the remote on the first field. Every other
+        // field on this screen is reached through here, so the search is done explicitly.
+        field.setOnKeyListener((view, keyCode, event) -> {
+            if (event.getAction() != KeyEvent.ACTION_DOWN) {
+                return false;
+            }
+            int direction;
+            if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                direction = View.FOCUS_DOWN;
+            } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+                direction = View.FOCUS_UP;
+            } else {
+                return false;
+            }
+            View next = view.focusSearch(direction);
+            return next != null && next.requestFocus(direction);
+        });
         field.setOnClickListener(view -> {
             InputMethodManager manager = getSystemService(InputMethodManager.class);
             if (manager != null) {

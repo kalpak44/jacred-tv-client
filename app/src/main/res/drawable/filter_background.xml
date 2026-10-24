@@ -3,22 +3,23 @@
     <item android:state_focused="true">
         <shape android:shape="rectangle">
             <solid android:color="@color/mint" />
-            <corners android:radius="22dp" />
-            <stroke android:width="3dp" android:color="#FFFFFF" />
+            <corners android:radius="@dimen/radius_pill" />
         </shape>
     </item>
+    <!-- Activated is "this filter is on" and has to stay legible next to the focused
+         chip, so it carries the accent as an outline rather than as a fill. -->
     <item android:state_activated="true">
         <shape android:shape="rectangle">
-            <solid android:color="#17584E" />
-            <corners android:radius="22dp" />
-            <stroke android:width="2dp" android:color="@color/mint" />
+            <solid android:color="@color/surface_focused" />
+            <corners android:radius="@dimen/radius_pill" />
+            <stroke android:width="@dimen/outline" android:color="@color/mint" />
         </shape>
     </item>
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#13263A" />
-            <corners android:radius="22dp" />
-            <stroke android:width="2dp" android:color="#2A3F56" />
+            <solid android:color="@color/surface" />
+            <corners android:radius="@dimen/radius_pill" />
+            <stroke android:width="@dimen/outline" android:color="@color/outline_colour" />
         </shape>
     </item>
 </selector>

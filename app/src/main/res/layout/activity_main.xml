@@ -3,14 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="48dp"
-    android:paddingTop="28dp"
-    android:paddingRight="48dp"
-    android:paddingBottom="20dp">
+    android:paddingLeft="@dimen/screen_margin_h"
+    android:paddingTop="@dimen/screen_margin_top"
+    android:paddingRight="@dimen/screen_margin_h"
+    android:paddingBottom="@dimen/screen_margin_bottom">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="@dimen/control_height"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -22,31 +22,17 @@
             android:text="@string/app_name"
             android:textAllCaps="true"
             android:textColor="@color/mint"
-            android:textSize="19sp" />
+            android:textSize="@dimen/text_subtitle" />
 
         <TextView
             android:id="@+id/server_chip"
-            android:layout_width="wrap_content"
-            android:layout_height="34dp"
-            android:layout_marginStart="22dp"
-            android:background="@drawable/chip_background"
-            android:gravity="center"
-            android:paddingLeft="14dp"
-            android:paddingRight="14dp"
-            android:textColor="@color/text_muted"
-            android:textSize="13sp" />
+            style="@style/HeaderChip"
+            android:layout_marginStart="@dimen/space_xl" />
 
         <TextView
             android:id="@+id/version_chip"
-            android:layout_width="wrap_content"
-            android:layout_height="34dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/chip_background"
-            android:gravity="center"
-            android:paddingLeft="14dp"
-            android:paddingRight="14dp"
-            android:textColor="@color/text_muted"
-            android:textSize="13sp" />
+            style="@style/HeaderChip"
+            android:layout_marginStart="@dimen/space_s" />
 
         <View
             android:layout_width="0dp"
@@ -56,106 +42,91 @@
         <Button
             android:id="@+id/settings_button"
             style="@style/GhostButton"
-            android:nextFocusDown="@id/query"
-            android:layout_width="150dp"
-            android:layout_height="52dp"
             android:drawableStart="@drawable/ic_settings"
-            android:drawablePadding="10dp"
+            android:drawablePadding="@dimen/space_m"
+            android:nextFocusDown="@id/query"
             android:text="@string/settings" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_l"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/query"
+            style="@style/Field"
+            android:layout_width="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:hint="@string/search_hint"
+            android:imeOptions="actionSearch"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:nextFocusUp="@id/settings_button"
+            android:textColorHighlight="@color/selection" />
+
+        <Button
+            android:id="@+id/search_button"
+            style="@style/PrimaryButton"
+            android:layout_width="150dp"
+            android:layout_marginStart="@dimen/space_l"
+            android:nextFocusUp="@id/settings_button"
+            android:text="@string/search" />
     </LinearLayout>
 
     <Button
         android:id="@+id/update_banner"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="@dimen/control_height"
+        android:layout_marginTop="@dimen/space_m"
         android:background="@drawable/update_banner"
         android:fontFamily="sans-serif-medium"
         android:gravity="center_vertical"
-        android:nextFocusUp="@id/settings_button"
         android:nextFocusDown="@id/query"
-        android:paddingLeft="22dp"
-        android:paddingRight="22dp"
+        android:nextFocusUp="@id/settings_button"
+        android:paddingLeft="@dimen/space_xl"
+        android:paddingRight="@dimen/space_xl"
         android:textAllCaps="false"
         android:textColor="@color/update_text"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_body"
         android:visibility="gone" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/query"
-            android:nextFocusUp="@id/settings_button"
-            android:layout_width="0dp"
-            android:layout_height="62dp"
-            android:layout_weight="1"
-            android:background="@drawable/field_background"
-            android:hint="@string/search_hint"
-            android:imeOptions="actionSearch"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:maxLines="1"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:textColor="@android:color/white"
-            android:textColorHighlight="@color/selection"
-            android:textColorHint="@color/text_muted"
-            android:textSize="19sp" />
-
-        <Button
-            android:id="@+id/search_button"
-            android:nextFocusUp="@id/settings_button"
-            android:layout_width="150dp"
-            android:layout_height="62dp"
-            android:layout_marginStart="16dp"
-            android:background="@drawable/button_background"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/search"
-            android:textAllCaps="false"
-            android:textColor="@color/button_text"
-            android:textSize="18sp" />
-    </LinearLayout>
 
     <TextView
         android:id="@+id/status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:textColor="@color/text_muted"
-        android:textSize="15sp" />
+        style="@style/StatusText"
+        android:layout_marginTop="@dimen/space_m" />
 
     <LinearLayout
         android:id="@+id/history_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/space_m"
         android:orientation="vertical"
         android:visibility="gone">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:letterSpacing="0.1"
-            android:text="@string/recent"
-            android:textAllCaps="true"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp" />
+            style="@style/SectionLabel"
+            android:text="@string/recent" />
 
+        <!-- clipChildren off on the scroller and the row alike: the focused card scales
+             up, and is otherwise cropped by whichever of them is tighter. -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/space_m"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/space_s"
+            android:paddingBottom="@dimen/space_s"
             android:scrollbars="none">
 
             <LinearLayout
                 android:id="@+id/history_row"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clipChildren="false"
                 android:orientation="horizontal" />
         </HorizontalScrollView>
     </LinearLayout>
@@ -166,24 +137,29 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:lineSpacingExtra="8dp"
+        android:lineSpacingExtra="@dimen/space_s"
         android:text="@string/empty_state"
         android:textColor="@color/text_muted"
-        android:textSize="17sp"
+        android:textSize="@dimen/text_subtitle"
         android:visibility="gone" />
 
     <GridView
         android:id="@+id/movies"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/space_m"
         android:layout_weight="1"
+        android:clipChildren="false"
         android:clipToPadding="false"
-        android:columnWidth="168dp"
-        android:horizontalSpacing="18dp"
+        android:columnWidth="160dp"
+        android:drawSelectorOnTop="true"
+        android:horizontalSpacing="@dimen/space_l"
+        android:listSelector="@drawable/card_focus"
         android:numColumns="auto_fit"
+        android:paddingTop="@dimen/space_s"
+        android:paddingBottom="@dimen/space_s"
         android:scrollbars="none"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="18dp" />
+        android:verticalSpacing="@dimen/space_l" />
 
 </LinearLayout>

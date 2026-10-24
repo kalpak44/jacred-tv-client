@@ -123,7 +123,15 @@ public class ReleasesActivity extends Activity {
         ((TextView) findViewById(R.id.movie_meta)).setText(meta.toString());
 
         overviewView = findViewById(R.id.movie_overview);
-        overviewView.setText(overview.isEmpty() ? getString(R.string.no_tmdb_hint) : overview);
+        // With a key configured there is nothing to advise: a plot is simply missing for
+        // this title, or the search came straight here and never looked one up.
+        if (!overview.isEmpty()) {
+            overviewView.setText(overview);
+        } else if (new Tmdb(prefs).isConfigured()) {
+            overviewView.setVisibility(View.GONE);
+        } else {
+            overviewView.setText(R.string.no_tmdb_hint);
+        }
 
         ImageView posterView = findViewById(R.id.movie_poster);
         if (poster.isEmpty()) {
@@ -140,7 +148,10 @@ public class ReleasesActivity extends Activity {
         if (!poster.isEmpty()) {
             findViewById(R.id.movie_poster).setVisibility(state);
         }
-        overviewView.setVisibility(state);
+        // Same guard as the poster: an empty plot has nothing to fold back out.
+        if (overviewView.getText().length() > 0) {
+            overviewView.setVisibility(state);
+        }
         headerBlock.setVisibility(visible || !title.isEmpty() ? View.VISIBLE : View.GONE);
     }
 

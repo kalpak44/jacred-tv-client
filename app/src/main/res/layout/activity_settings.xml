@@ -2,10 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="48dp"
-    android:paddingTop="32dp"
-    android:paddingRight="48dp"
-    android:paddingBottom="32dp">
+    android:paddingLeft="@dimen/screen_margin_h"
+    android:paddingTop="@dimen/screen_margin_top"
+    android:paddingRight="@dimen/screen_margin_h"
+    android:paddingBottom="@dimen/screen_margin_bottom">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,20 +13,16 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:text="@string/settings"
-            android:textColor="@android:color/white"
-            android:textSize="32sp" />
+            style="@style/ScreenTitle"
+            android:text="@string/settings" />
 
         <TextView
             android:id="@+id/version_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="@dimen/space_xs"
             android:textColor="@color/text_muted"
-            android:textSize="15sp" />
+            android:textSize="@dimen/text_label" />
 
         <TextView
             style="@style/FieldLabel"
@@ -76,7 +72,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="@dimen/space_xl"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -129,7 +125,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="@dimen/space_xl"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -148,7 +144,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="@dimen/space_l"
             android:orientation="horizontal">
 
             <Button
@@ -159,19 +155,19 @@
             <Button
                 android:id="@+id/mirror_button"
                 style="@style/SecondaryButton"
-                android:layout_marginStart="14dp"
+                android:layout_marginStart="@dimen/space_m"
                 android:text="@string/use_image_mirror" />
 
             <Button
                 android:id="@+id/clear_history_button"
                 style="@style/SecondaryButton"
-                android:layout_marginStart="14dp"
+                android:layout_marginStart="@dimen/space_m"
                 android:text="@string/clear_history" />
 
             <Button
                 android:id="@+id/update_button"
                 style="@style/SecondaryButton"
-                android:layout_marginStart="14dp"
+                android:layout_marginStart="@dimen/space_m"
                 android:text="@string/check_updates" />
         </LinearLayout>
 
@@ -182,55 +178,42 @@
         <Button
             android:id="@+id/player_button"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginTop="8dp"
+            android:layout_height="@dimen/control_height_l"
+            android:layout_marginTop="@dimen/space_s"
             android:background="@drawable/field_background"
             android:gravity="center_vertical"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:paddingLeft="@dimen/space_xl"
+            android:paddingRight="@dimen/space_xl"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_subtitle" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="@dimen/space_xxl"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/test_button"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:background="@drawable/button_background"
-                android:fontFamily="sans-serif-medium"
-                android:paddingLeft="32dp"
-                android:paddingRight="32dp"
-                android:text="@string/test_connection"
-                android:textColor="@color/button_text"
-                android:textSize="17sp" />
+                style="@style/SecondaryButton"
+                android:layout_height="@dimen/control_height_l"
+                android:text="@string/test_connection" />
 
             <Button
                 android:id="@+id/save_button"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginStart="18dp"
-                android:background="@drawable/button_background"
-                android:fontFamily="sans-serif-medium"
-                android:paddingLeft="32dp"
-                android:paddingRight="32dp"
-                android:text="@string/save"
-                android:textColor="@color/button_text"
-                android:textSize="17sp" />
+                style="@style/PrimaryButton"
+                android:layout_marginStart="@dimen/space_l"
+                android:text="@string/save" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/test_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/space_l"
             android:textColor="@color/text_secondary"
-            android:textSize="16sp" />
+            android:textSize="@dimen/text_body" />
 
     </LinearLayout>
 </ScrollView>

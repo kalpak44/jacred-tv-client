@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.HelloTv" parent="android:style/Theme.Material.NoActionBar">
+    <style name="Theme.JacRedTv" parent="android:style/Theme.Material.NoActionBar">
         <item name="android:fontFamily">sans</item>
         <item name="android:windowActionModeOverlay">true</item>
         <item name="android:windowNoTitle">true</item>
@@ -12,74 +12,133 @@
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
+    <!-- The title of a screen. One per screen, and nothing else uses this size. -->
+    <style name="ScreenTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_display</item>
+    </style>
+
+    <!-- The caps label above a field. Mint carries the structure of the screen; the
+         content below it stays white, so the two never compete. -->
     <style name="FieldLabel">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">22dp</item>
+        <item name="android:layout_marginTop">@dimen/space_xl</item>
         <item name="android:letterSpacing">0.08</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/mint</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/text_label</item>
+    </style>
+
+    <style name="SectionLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">@dimen/text_label</item>
     </style>
 
     <style name="Field">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">64dp</item>
-        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_height">@dimen/control_height_l</item>
+        <item name="android:layout_marginTop">@dimen/space_s</item>
         <item name="android:background">@drawable/field_background</item>
         <item name="android:maxLines">1</item>
-        <item name="android:paddingLeft">20dp</item>
-        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingLeft">@dimen/space_xl</item>
+        <item name="android:paddingRight">@dimen/space_xl</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textColorHint">@color/text_muted</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/text_subtitle</item>
     </style>
+
+    <!-- Was 48dp tall with 22dp of side padding: two rows of these owned half the
+         releases screen and left room for two results. -->
     <style name="FilterChip">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:layout_marginEnd">12dp</item>
+        <item name="android:layout_height">@dimen/chip_height</item>
+        <item name="android:layout_marginEnd">@dimen/space_s</item>
         <item name="android:background">@drawable/filter_background</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:paddingLeft">22dp</item>
-        <item name="android:paddingRight">22dp</item>
+        <item name="android:paddingLeft">@dimen/space_l</item>
+        <item name="android:paddingRight">@dimen/space_l</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/filter_text</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/text_label</item>
     </style>
 
     <style name="GhostButton">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">54dp</item>
+        <item name="android:layout_height">@dimen/control_height</item>
         <item name="android:background">@drawable/ghost_button</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:letterSpacing">0.02</item>
-        <item name="android:paddingLeft">22dp</item>
-        <item name="android:paddingRight">22dp</item>
+        <item name="android:paddingLeft">@dimen/space_xl</item>
+        <item name="android:paddingRight">@dimen/space_xl</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/ghost_text</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/text_label</item>
     </style>
 
     <style name="SecondaryButton">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">54dp</item>
+        <item name="android:layout_height">@dimen/control_height</item>
         <item name="android:background">@drawable/filter_background</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:paddingLeft">24dp</item>
-        <item name="android:paddingRight">24dp</item>
+        <item name="android:paddingLeft">@dimen/space_xl</item>
+        <item name="android:paddingRight">@dimen/space_xl</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/filter_text</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/text_label</item>
     </style>
+
+    <!-- The one filled action on a screen. -->
+    <style name="PrimaryButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/control_height_l</item>
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:paddingLeft">@dimen/space_xxl</item>
+        <item name="android:paddingRight">@dimen/space_xxl</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textSize">@dimen/text_subtitle</item>
+    </style>
+
+    <!-- A read-only metadata pill. Never focusable, so it carries no focus state. -->
     <style name="Chip">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginEnd">@dimen/space_s</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:paddingLeft">12dp</item>
-        <item name="android:paddingTop">4dp</item>
-        <item name="android:paddingRight">12dp</item>
-        <item name="android:paddingBottom">4dp</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:paddingLeft">@dimen/space_m</item>
+        <item name="android:paddingTop">@dimen/space_xs</item>
+        <item name="android:paddingRight">@dimen/space_m</item>
+        <item name="android:paddingBottom">@dimen/space_xs</item>
+        <item name="android:textSize">@dimen/text_caption</item>
+    </style>
+
+    <!-- A status chip in a screen header. -->
+    <style name="HeaderChip">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:background">@drawable/chip_background</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">@dimen/space_l</item>
+        <item name="android:paddingRight">@dimen/space_l</item>
+        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textSize">@dimen/text_label</item>
+    </style>
+
+    <!-- A line of explanation under a control, never a thing to act on. -->
+    <style name="StatusText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textSize">@dimen/text_body</item>
     </style>
 </resources>

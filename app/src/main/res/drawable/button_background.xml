@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  The primary action. It is accent-outlined until focused and accent-filled once it is,
+  so "focused" means the same thing here as on every other control. Filling it by default
+  would leave focus with nothing to say.
+-->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_focused="true">
         <shape android:shape="rectangle">
             <solid android:color="@color/mint" />
-            <corners android:radius="10dp" />
-            <stroke android:width="3dp" android:color="#FFFFFF" />
+            <corners android:radius="@dimen/radius" />
         </shape>
     </item>
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <solid android:color="#4ADFBB" />
-            <corners android:radius="10dp" />
+            <corners android:radius="@dimen/radius" />
         </shape>
     </item>
+    <!-- The unfocused outline is neutral, never mint: an accent border next to a focused
+         control reads as a second focus, and only one thing on screen has focus. The
+         accent text is what still marks this as the primary action. -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/mint" />
-            <corners android:radius="10dp" />
+            <solid android:color="@color/surface_raised" />
+            <corners android:radius="@dimen/radius" />
+            <stroke android:width="@dimen/outline" android:color="@color/outline_colour" />
         </shape>
     </item>
 </selector>

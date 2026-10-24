@@ -3,15 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:paddingLeft="48dp"
-    android:paddingTop="32dp"
-    android:paddingRight="48dp"
-    android:paddingBottom="24dp">
+    android:paddingLeft="@dimen/screen_margin_h"
+    android:paddingTop="@dimen/screen_margin_top"
+    android:paddingRight="@dimen/screen_margin_h"
+    android:paddingBottom="@dimen/screen_margin_bottom">
 
     <ImageView
         android:id="@+id/detail_poster"
-        android:layout_width="168dp"
-        android:layout_height="252dp"
+        android:layout_width="200dp"
+        android:layout_height="300dp"
         android:background="@drawable/poster_placeholder"
         android:contentDescription="@string/app_name"
         android:scaleType="centerCrop" />
@@ -19,120 +19,106 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="@dimen/space_xxl"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/detail_title"
+            style="@style/ScreenTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:fontFamily="sans-serif-light"
-            android:maxLines="2"
-            android:textColor="@android:color/white"
-            android:textSize="27sp" />
+            android:maxLines="2" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/detail_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/detail_subtitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textColor="@color/mint"
-                android:textSize="16sp" />
-        </LinearLayout>
+            android:layout_marginTop="@dimen/space_s"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/mint"
+            android:textSize="@dimen/text_body" />
 
         <TextView
             android:id="@+id/detail_overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/space_m"
             android:ellipsize="end"
+            android:lineSpacingExtra="@dimen/space_xs"
             android:maxLines="3"
             android:textColor="@color/text_secondary"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_label"
             android:visibility="gone" />
 
         <TextView
             android:id="@+id/detail_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="@dimen/space_l"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textSize="@dimen/text_body" />
 
         <TextView
             android:id="@+id/detail_stats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="@dimen/space_xs"
             android:fontFamily="sans-serif-medium"
             android:textColor="@color/mint"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/detail_hint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/text_muted"
-            android:textSize="13sp" />
+            android:textSize="@dimen/text_label" />
 
         <HorizontalScrollView
             android:id="@+id/action_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="@dimen/space_l"
             android:scrollbars="none"
             android:visibility="gone">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/watch_button"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="54dp"
-                android:layout_marginEnd="14dp"
-                android:background="@drawable/button_background"
-                android:fontFamily="sans-serif-medium"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:text="@string/watch"
-                android:textAllCaps="false"
-                android:textColor="@color/button_text"
-                android:textSize="16sp"
-                android:visibility="gone" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/keep_button"
-                style="@style/GhostButton"
-                android:layout_marginEnd="14dp"
-                android:text="@string/keep_on_server"
-                android:visibility="gone" />
+                <Button
+                    android:id="@+id/watch_button"
+                    style="@style/PrimaryButton"
+                    android:layout_marginEnd="@dimen/space_m"
+                    android:text="@string/watch"
+                    android:visibility="gone" />
 
-            <Button
-                android:id="@+id/magnet_button"
-                style="@style/GhostButton"
-                android:layout_marginEnd="14dp"
-                android:text="@string/open_magnet" />
-        </LinearLayout>
+                <Button
+                    android:id="@+id/keep_button"
+                    style="@style/GhostButton"
+                    android:layout_height="@dimen/control_height_l"
+                    android:layout_marginEnd="@dimen/space_m"
+                    android:text="@string/keep_on_server"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/magnet_button"
+                    style="@style/GhostButton"
+                    android:layout_height="@dimen/control_height_l"
+                    android:text="@string/open_magnet" />
+            </LinearLayout>
         </HorizontalScrollView>
+
+        <!-- Directly above the list it describes. It used to sit over the action row,
+             where it read as advice about the buttons. -->
+        <TextView
+            android:id="@+id/detail_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_l"
+            android:textColor="@color/text_muted"
+            android:textSize="@dimen/text_caption" />
 
         <ListView
             android:id="@+id/file_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/space_s"
             android:layout_weight="1"
             android:clipToPadding="false"
             android:divider="@null"

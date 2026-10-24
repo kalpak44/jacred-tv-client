@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  A grid child never takes focus itself — the GridView holds it and marks one child
+  selected — so this carries no focus state. The ring comes from the grid's listSelector.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="@android:color/transparent" />
+    <corners android:radius="@dimen/radius" />
+    <stroke android:width="@dimen/outline" android:color="@color/outline_colour" />
+</shape>

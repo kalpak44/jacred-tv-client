@@ -142,9 +142,8 @@ public class MainActivity extends Activity {
             }
         });
 
-        // The previous query comes back selected, so typing over it replaces it.
-        queryField.setText(prefs.get(Prefs.LAST_QUERY, ""));
-        queryField.selectAll();
+        // The box starts empty: a title typed yesterday is rarely the one wanted now, and
+        // coming back to a prefilled search box reads as a search that already ran.
         queryField.requestFocus();
     }
 
@@ -401,7 +400,6 @@ public class MainActivity extends Activity {
             return;
         }
         hideKeyboard();
-        prefs.set(Prefs.LAST_QUERY, query);
 
         if (!tmdb.isConfigured()) {
             // No artwork available, so skip the browse step entirely.

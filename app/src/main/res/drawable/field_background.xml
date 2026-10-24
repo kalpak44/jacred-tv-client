@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  A text field cannot fill with the accent on focus — the text would sit on it — so it
+  takes the ring instead. It is the one exception to the fill rule.
+-->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_focused="true">
         <shape android:shape="rectangle">
-            <solid android:color="#13263A" />
-            <corners android:radius="10dp" />
-            <stroke android:width="3dp" android:color="@color/mint" />
+            <solid android:color="@color/surface_raised" />
+            <corners android:radius="@dimen/radius" />
+            <stroke android:width="@dimen/focus_ring" android:color="@color/mint" />
         </shape>
     </item>
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#0E1C2C" />
-            <corners android:radius="10dp" />
-            <stroke android:width="2dp" android:color="#2A3F56" />
+            <solid android:color="@color/surface" />
+            <corners android:radius="@dimen/radius" />
+            <stroke android:width="@dimen/outline" android:color="@color/outline_colour" />
         </shape>
     </item>
 </selector>

@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="48dp"
-    android:paddingTop="28dp"
-    android:paddingRight="48dp"
-    android:paddingBottom="20dp">
+    android:paddingLeft="@dimen/screen_margin_h"
+    android:paddingTop="@dimen/screen_margin_top"
+    android:paddingRight="@dimen/screen_margin_h"
+    android:paddingBottom="@dimen/screen_margin_bottom">
 
     <LinearLayout
         android:id="@+id/header_block"
@@ -16,8 +16,9 @@
 
         <ImageView
             android:id="@+id/movie_poster"
-            android:layout_width="104dp"
-            android:layout_height="156dp"
+            android:layout_width="88dp"
+            android:layout_height="132dp"
+            android:layout_marginEnd="@dimen/space_xl"
             android:background="@drawable/poster_placeholder"
             android:contentDescription="@string/app_name"
             android:scaleType="centerCrop" />
@@ -25,7 +26,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:orientation="vertical">
 
             <TextView
@@ -36,40 +36,40 @@
                 android:fontFamily="sans-serif-light"
                 android:maxLines="1"
                 android:textColor="@android:color/white"
-                android:textSize="30sp" />
+                android:textSize="@dimen/text_title" />
 
             <TextView
                 android:id="@+id/movie_meta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="@dimen/space_xs"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="@color/mint"
-                android:textSize="15sp" />
+                android:textSize="@dimen/text_label" />
 
             <TextView
                 android:id="@+id/movie_overview"
                 android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/space_s"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:textColor="@color/text_secondary"
-                android:textSize="14sp" />
+                android:textSize="@dimen/text_label" />
 
             <Button
                 android:id="@+id/alt_title_button"
                 style="@style/GhostButton"
-                android:layout_marginTop="12dp" />
+                android:layout_marginTop="@dimen/space_m" />
         </LinearLayout>
     </LinearLayout>
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/space_m"
         android:scrollbars="none">
 
         <LinearLayout
@@ -82,7 +82,7 @@
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/space_s"
         android:scrollbars="none">
 
         <LinearLayout
@@ -94,17 +94,14 @@
 
     <TextView
         android:id="@+id/status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:textColor="@color/text_muted"
-        android:textSize="15sp" />
+        style="@style/StatusText"
+        android:layout_marginTop="@dimen/space_m" />
 
     <ListView
         android:id="@+id/releases"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/space_s"
         android:layout_weight="1"
         android:clipToPadding="false"
         android:divider="@null"

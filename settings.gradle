@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "HelloTv"
+rootProject.name = "JacRedTv"
 include(":app")

@@ -1,19 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- One accent only: on a dark ten-foot screen a second one competes with the focus
+         ring, which has to mean exactly one thing. -->
     <color name="mint">#67F5D2</color>
-    <color name="text_secondary">#D4DFEA</color>
-    <color name="text_muted">#8192A6</color>
     <color name="button_text">#071621</color>
+
+    <!-- Surfaces, lightest last. A focused row is raised rather than tinted, so focus
+         stays legible on a panel with crushed blacks. -->
+    <color name="surface">#12233A</color>
+    <color name="surface_raised">#1B3047</color>
+    <color name="surface_focused">#24405C</color>
+    <color name="outline_colour">#27405A</color>
+
+    <color name="text_secondary">#D4DFEA</color>
+    <!-- Was #8192A6, which fell under 4.5:1 on this background and read as disabled
+         rather than secondary. -->
+    <color name="text_muted">#9BACC1</color>
     <color name="warning">#FFB4A2</color>
+
     <!-- Selected query text: the grey system highlight looks like a rendering fault here. -->
     <color name="selection">#6625B49A</color>
+
+    <!-- Metadata chips. Hue carries the meaning, so each stays distinct, but all sit at
+         one lightness so no single chip shouts over the title it describes. -->
     <color name="chip_size_text">#67F5D2</color>
-    <color name="chip_seed_text">#74E39B</color>
+    <color name="chip_seed_text">#7FE8A6</color>
     <color name="chip_peer_text">#FF9A9A</color>
-    <color name="chip_date_text">#9FB3C8</color>
-    <color name="chip_quality_text">#86B9FF</color>
-    <color name="chip_voice_text">#C2A6FF</color>
+    <color name="chip_date_text">#A8BACE</color>
+    <color name="chip_quality_text">#8FBEFF</color>
+    <color name="chip_voice_text">#C8AEFF</color>
     <color name="chip_quality_4k_text">#F7D070</color>
+
     <!-- Amber, not mint: the update banner has to read as a notice rather than as
          one more control in the row above it. -->
     <color name="update">#F7C948</color>

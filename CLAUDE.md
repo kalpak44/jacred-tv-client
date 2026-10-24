@@ -103,9 +103,6 @@ heuristic.
 - Java source/target compatibility: 17
 - Release build: R8 minify plus resource shrinking, signed from
   `keystore.properties` when that file exists (see README)
-- Named `HelloTv` still in `settings.gradle` (`rootProject.name`) and the
-  `Theme.HelloTv` style: renaming them changes the Gradle project and a
-  resource identifier, so it is a code change, not a doc fix
 
 Keep all controls usable with the D-pad. Every interactive control must have a
 clear focused state, and the app must not require touch input. Design for a

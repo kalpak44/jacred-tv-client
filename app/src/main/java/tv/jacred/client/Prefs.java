@@ -21,7 +21,6 @@ final class Prefs {
     static final String TMDB_IMAGES = "tmdb_images";
     static final String PLAYER = "player";
     static final String PLAYER_LABEL = "player_label";
-    static final String LAST_QUERY = "last_query";
     static final String HISTORY = "history";
     static final String SOURCE = "source";
     static final String UPDATE_LATEST = "update_latest";

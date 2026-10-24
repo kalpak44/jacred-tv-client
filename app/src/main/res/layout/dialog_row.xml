@@ -2,23 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="@dimen/space_s"
     android:background="@drawable/dialog_row_background"
     android:clickable="true"
     android:focusable="true"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingLeft="20dp"
-    android:paddingTop="14dp"
-    android:paddingRight="20dp"
-    android:paddingBottom="14dp">
+    android:paddingLeft="@dimen/space_xl"
+    android:paddingTop="@dimen/space_l"
+    android:paddingRight="@dimen/space_xl"
+    android:paddingBottom="@dimen/space_l">
 
     <TextView
         android:id="@+id/row_tick"
         android:layout_width="36dp"
         android:layout_height="wrap_content"
         android:textColor="@color/mint"
-        android:textSize="20sp" />
+        android:textSize="@dimen/text_subtitle" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,17 +32,17 @@
             android:ellipsize="middle"
             android:maxLines="1"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_subtitle" />
 
         <TextView
             android:id="@+id/row_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="@dimen/space_xs"
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/text_muted"
-            android:textSize="13sp" />
+            android:textSize="@dimen/text_caption" />
     </LinearLayout>
 
 </LinearLayout>

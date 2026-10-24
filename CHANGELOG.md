@@ -6,6 +6,16 @@ tag, so keep this a flat `## [X.Y.Z]` list — it inserts above the first such
 heading, and a different structure either breaks the insert or gets corrupted by
 it.
 
+## [1.1.0]
+
+- Rework the interface against one spacing, type and focus scale, so focus means the same
+  thing on every control and the filter chips no longer take half the releases screen.
+- Stop Settings opening the keyboard by itself, and let the D-pad move between its fields
+  instead of trapping the remote on the first one.
+- Start with an empty search box rather than restoring the last query.
+- Stop offering a TMDB key in the plot line when one is already configured.
+- Rename the Gradle project and theme from HelloTv to JacRedTv.
+
 ## [1.0.3]
 
 - Show the release's changelog entry in the update dialog, so an update says what it
