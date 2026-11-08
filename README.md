@@ -21,15 +21,41 @@ The app has no third-party dependencies: Android framework, `org.json` and
 
 ## Screens
 
-| | |
-| --- | --- |
-| ![Home](docs/screenshots/01-home.png) **Home** — search box, TorrServer and version chips, recently-watched row | ![Titles](docs/screenshots/02-titles.png) **Titles** — TMDB poster wall for the query |
-| ![Releases](docs/screenshots/03-releases.png) **Releases** — jac.red results with sort and facet filters | ![Detail](docs/screenshots/04-detail.png) **Detail** — TorrServer file list, Watch / Keep / magnet |
+Captured on the Mi Box at 1080p, in the order a remote walks through them.
 
-![Settings](docs/screenshots/05-settings.png)
+<p align="center">
+  <img src="docs/screenshots/01-home.png" alt="Home screen" width="100%">
+  <br>
+  <b>Home</b> — search box, TorrServer and version chips, recently-watched row
+</p>
 
-**Settings** — jac.red and TorrServer addresses, TMDB credentials, default player, and
-**Check for updates**. Captured on the Mi Box at 1080p; the TMDB key is painted out.
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/02-titles.png" alt="Titles screen">
+      <br>
+      <b>Titles</b> — TMDB poster wall for the query
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/03-releases.png" alt="Releases screen">
+      <br>
+      <b>Releases</b> — jac.red results with sort and facet filters
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/04-detail.png" alt="Detail screen">
+      <br>
+      <b>Detail</b> — TorrServer file list, Watch / Keep / magnet
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/05-settings.png" alt="Settings screen">
+      <br>
+      <b>Settings</b> — jac.red and TorrServer addresses, TMDB credentials, default player
+      and <b>Check for updates</b>; the TMDB key is painted out
+    </td>
+  </tr>
+</table>
 
 ## Requirements
 
