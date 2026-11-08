@@ -28,9 +28,8 @@ The app has no third-party dependencies: Android framework, `org.json` and
 
 ![Settings](docs/screenshots/05-settings.png)
 
-**Settings** — TorrServer credentials, TMDB key and addresses, image mirror, history,
-**Check for updates** and the interface language. Captured on the Mi Box at 1080p; the TMDB
-key is painted out.
+**Settings** — jac.red and TorrServer addresses, TMDB credentials, default player, and
+**Check for updates**. Captured on the Mi Box at 1080p; the TMDB key is painted out.
 
 ## Requirements
 
