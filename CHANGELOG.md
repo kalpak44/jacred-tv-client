@@ -6,6 +6,10 @@ tag, so keep this a flat `## [X.Y.Z]` list — it inserts above the first such
 heading, and a different structure either breaks the insert or gets corrupted by
 it.
 
+## [1.2.5]
+
+- gradle-wrapper patch update 9.9.0 to 9.9.1; validation passed
+
 ## [1.2.4]
 
 - gradle-wrapper 9.8.2 -> 9.9.0 minor dependency bump
