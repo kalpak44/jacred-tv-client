@@ -6,6 +6,13 @@ tag, so keep this a flat `## [X.Y.Z]` list — it inserts above the first such
 heading, and a different structure either breaks the insert or gets corrupted by
 it.
 
+## [1.3.0]
+
+- Watch plays the first unwatched video in the torrent's own file order, and says so
+  when every file is already watched
+- A separate Remove from server button drops the torrent from TorrServer; Keep on
+  server now only keeps
+
 ## [1.2.5]
 
 - gradle-wrapper patch update 9.9.0 to 9.9.1; validation passed
