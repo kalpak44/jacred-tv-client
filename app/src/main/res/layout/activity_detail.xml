@@ -100,7 +100,15 @@
                     android:id="@+id/magnet_button"
                     style="@style/GhostButton"
                     android:layout_height="@dimen/control_height_l"
+                    android:layout_marginEnd="@dimen/space_m"
                     android:text="@string/open_magnet" />
+
+                <Button
+                    android:id="@+id/remove_button"
+                    style="@style/GhostButton"
+                    android:layout_height="@dimen/control_height_l"
+                    android:text="@string/remove_from_server"
+                    android:visibility="gone" />
             </LinearLayout>
         </HorizontalScrollView>
 

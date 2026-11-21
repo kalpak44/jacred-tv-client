@@ -120,7 +120,8 @@ public class DetailActivity extends Activity {
 
         findViewById(R.id.watch_button).setOnClickListener(view -> watchBestFile());
         keepButton = findViewById(R.id.keep_button);
-        keepButton.setOnClickListener(view -> toggleOnServer());
+        keepButton.setOnClickListener(view -> keepOnServer());
+        findViewById(R.id.remove_button).setOnClickListener(view -> removeFromServer());
         findViewById(R.id.magnet_button).setOnClickListener(view -> openMagnetExternally());
 
         if (posterUrl.isEmpty()) {
@@ -249,32 +250,38 @@ public class DetailActivity extends Activity {
             hash = opened.hash;
             onServer = opened.alreadyThere;
             updateKeepButton();
+            findViewById(R.id.remove_button).setVisibility(View.VISIBLE);
             poll(POLL_ATTEMPTS);
         });
     }
 
-    /** One button for both directions: keep what is not held, drop what is. */
+    /** Keep is only offered for what the server does not hold yet; Remove is always there. */
     private void updateKeepButton() {
-        keepButton.setText(onServer ? R.string.remove_from_server : R.string.keep_on_server);
+        keepButton.setVisibility(onServer ? View.GONE : View.VISIBLE);
     }
 
     /**
-     * Keeps the torrent or drops it, whichever the button is offering. Keeping re-adds the
-     * same magnet with save_to_db so it survives in the TorrServer library; dropping hands
-     * the hash back. Playing still works either way — every launch re-adds the magnet.
+     * Drops the torrent from TorrServer, whether it was kept or only added to play. Playing
+     * still works afterwards — every launch re-adds the magnet.
      */
-    private void toggleOnServer() {
-        if (onServer) {
-            final String torrentHash = hash;
-            onServer = false;
-            updateKeepButton();
-            Ui.background(this, () -> {
-                server.remove(torrentHash);
-                return null;
-            }, (ignored, error) ->
-                    Toast.makeText(this, R.string.status_removed, Toast.LENGTH_SHORT).show());
+    private void removeFromServer() {
+        if (hash.isEmpty()) {
             return;
         }
+        final String torrentHash = hash;
+        onServer = false;
+        updateKeepButton();
+        Ui.background(this, () -> {
+            server.remove(torrentHash);
+            return null;
+        }, (ignored, error) ->
+                Toast.makeText(this, R.string.status_removed, Toast.LENGTH_SHORT).show());
+    }
+
+    /**
+     * Re-adds the same magnet with save_to_db so it survives in the TorrServer library.
+     */
+    private void keepOnServer() {
         Ui.background(this, () -> server.add(magnet, title, posterUrl, true), (kept, error) -> {
             if (error != null) {
                 Toast.makeText(this, getString(R.string.status_keep_failed, Ui.message(error)),
@@ -333,7 +340,7 @@ public class DetailActivity extends Activity {
         showStatus();
         actionRow.setVisibility(View.VISIBLE);
         findViewById(R.id.watch_button).setVisibility(View.VISIBLE);
-        findViewById(R.id.keep_button).setVisibility(View.VISIBLE);
+        updateKeepButton();
         findViewById(R.id.watch_button).requestFocus();
         fileList.setSelection(0);
 
@@ -403,19 +410,21 @@ public class DetailActivity extends Activity {
                 });
     }
 
-    /** Plays the largest video file — the feature, in all but the oddest torrents. */
+    /** Plays the first unwatched video in TorrServer's order — the next episode of a season. */
     private void watchBestFile() {
-        TorrFile best = null;
+        boolean anyVideo = false;
         for (TorrFile file : files) {
-            if (file.isVideo() && (best == null || file.length > best.length)) {
-                best = file;
+            if (!file.isVideo()) {
+                continue;
+            }
+            anyVideo = true;
+            if (!viewed.contains(file.id)) {
+                play(file);
+                return;
             }
         }
-        if (best == null) {
-            Toast.makeText(this, R.string.status_nothing_playable, Toast.LENGTH_SHORT).show();
-            return;
-        }
-        play(best);
+        Toast.makeText(this, anyVideo ? R.string.status_all_watched
+                : R.string.status_nothing_playable, Toast.LENGTH_SHORT).show();
     }
 
     /** Held OK on a file: play it, continue from it, or change its watched mark. */

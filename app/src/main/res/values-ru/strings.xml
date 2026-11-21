@@ -22,6 +22,7 @@
     <string name="status_kept">Сохранено в библиотеке TorrServer.</string>
     <string name="status_keep_failed">Не удалось сохранить: %1$s</string>
     <string name="status_nothing_playable">В этом торренте нет видеофайла.</string>
+    <string name="status_all_watched">Все файлы просмотрены.</string>
 
     <string name="chip_checking">Проверяем TorrServer…</string>
     <string name="chip_online">TorrServer %1$s</string>

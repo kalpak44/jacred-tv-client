@@ -18,6 +18,7 @@
     <string name="status_kept">Saved to the TorrServer library.</string>
     <string name="status_keep_failed">Could not save it: %1$s</string>
     <string name="status_nothing_playable">This torrent has no video file.</string>
+    <string name="status_all_watched">All files are watched.</string>
 
     <string name="chip_checking">Checking TorrServer…</string>
     <string name="chip_online">TorrServer %1$s</string>
