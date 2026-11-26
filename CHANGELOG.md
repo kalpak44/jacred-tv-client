@@ -6,6 +6,10 @@ tag, so keep this a flat `## [X.Y.Z]` list — it inserts above the first such
 heading, and a different structure either breaks the insert or gets corrupted by
 it.
 
+## [1.3.2]
+
+- merged Gradle Android plugin patch update
+
 ## [1.3.1]
 
 - patch Gradle and Android Gradle Plugin dependency updates
